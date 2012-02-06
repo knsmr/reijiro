@@ -1,0 +1,20 @@
+!!!
+%html
+  %head
+    %title Reijiro
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    .navbar
+      .navbar-inner
+        .container
+          %a.brand{:href => "/"} Eeijiro
+          %ul.nav
+            %li.active
+              %a{:href => "/clips"} clips
+            %li
+              %a{:href => "/words"} All words
+
+    .container
+      = yield
