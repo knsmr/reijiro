@@ -1,0 +1,15 @@
+%p#notice= notice
+
+#word
+  %ul
+    %li{id: "level"}
+      Level:
+      = @word.level
+    %li{id: "last"}
+      Imported:
+      = time_ago_in_words(@word.updated_at)
+
+  #entry
+    = @word.entry
+  %p
+    = simple_format(@word.def)
