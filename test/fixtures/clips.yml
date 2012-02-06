@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  word_id: 1
+  status: 1
+  nextup: false
+  shown: 1
+
+two:
+  word_id: 1
+  status: 1
+  nextup: false
+  shown: 1
