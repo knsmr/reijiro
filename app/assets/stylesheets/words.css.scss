@@ -1,0 +1,52 @@
+// Place all the styles related to the clips controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.item {
+    margin: 5px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #888888;
+    clear: both;
+
+    .entry {
+	font-size: 20px;
+	width: 150px;
+	color: red;
+	float: left;
+    }
+    .definition {
+	font-weight: bold;
+	margin-left: 30px;
+	float: left;
+    }
+}
+
+#word {
+    padding: 0 0 0 10px;
+
+    #entry {
+	font-size: 32px;
+	text-shadow: 1px 1px 1px #333333;
+	background-color: #eeeeee;
+	padding: 10px 0px 20px 5px;
+	margin-bottom: 10px;
+	clear: both;
+	border-radius: 5px;
+    }
+
+    ul li {
+	list-style-type: none;
+	font-size: 20px;
+	font-weight: bold;
+	padding: 0px 20px 20px 0px;
+	float: left;
+    }
+
+    #status-digit {
+	display: none;
+    }
+
+    #status {
+	clear: both;
+    }
+}
