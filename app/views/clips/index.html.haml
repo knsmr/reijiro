@@ -1,5 +1,3 @@
-%h1 Listing clips
-
 %table
   %tr
     %th Word
@@ -12,7 +10,7 @@
 
   - @clips.each do |clip|
     %tr
-      %td= clip.word_id
+      %td= clip.word.entry
       %td= clip.status
       %td= clip.nextup
       %td= clip.shown
