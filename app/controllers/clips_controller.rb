@@ -1,5 +1,16 @@
 class ClipsController < ApplicationController
-  # GET /clips
+  INTERVAL = {
+    0 => 1.hour,
+    1 => 1.day,
+    2 => 3.days,
+    3 => 1.week,
+    4 => 2.weeks,
+    5 => 1.month,
+    6 => 2.months,
+    7 => 4.months
+  }
+
+  # 1 /clips
   # GET /clips.json
   def index
     @clips = Clip.all
@@ -19,6 +30,13 @@ class ClipsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @clip }
     end
+  end
+
+  def nextup
+    @clips = Clip.all.find_all do |clip|
+      Time.now - clip.updated_at > INTERVAL[clip.status]
+    end
+    render 'index'
   end
 
   # GET /clips/new
@@ -42,14 +60,10 @@ class ClipsController < ApplicationController
   def create
     @clip = Clip.new(params[:clip])
 
-    respond_to do |format|
-      if @clip.save
-        format.html { redirect_to @clip, notice: 'Clip was successfully created.' }
-        format.json { render json: @clip, status: :created, location: @clip }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @clip.errors, status: :unprocessable_entity }
-      end
+    if @clip.save
+      redirect_to word_path(@clip.word) , flash: {notice: "added #{@clip.word.entry}"}
+    else
+      redirect_to word_path(@clip.word), flash: {error: "Error"}
     end
   end
 
