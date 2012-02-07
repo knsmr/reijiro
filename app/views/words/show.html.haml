@@ -9,12 +9,13 @@
       Imported:
       = time_ago_in_words(@word.updated_at)
 
-  = form_for @word.build_clip do |f|
-    = f.hidden_field :word_id
-    = f.hidden_field :status
-    = f.hidden_field :shown
-    = f.hidden_field :nextup
-    = f.submit 'Clip this!'
+  - unless Clip.where(word_id: @word.id).first
+    = form_for Clip.new(shown: 1, word_id: @word.id) do |f|
+      = f.hidden_field :word_id
+      = f.hidden_field :status
+      = f.hidden_field :shown
+      = f.hidden_field :nextup
+      = f.submit 'Clip this!'
 
   #entry
     = @word.entry
