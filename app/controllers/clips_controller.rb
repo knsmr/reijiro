@@ -7,7 +7,8 @@ class ClipsController < ApplicationController
     4 => 2.weeks,
     5 => 1.month,
     6 => 2.months,
-    7 => 4.months
+    7 => 4.months,
+    8 => 8.months
   }
 
   # 1 /clips
