@@ -39,6 +39,14 @@ class ClipsController < ApplicationController
     render 'index'
   end
 
+  def next
+    @clip = Clip.all.find do |clip|
+      Time.now - clip.updated_at > INTERVAL[clip.status]
+    end
+    @word = @clip.word
+    render template: 'words/show'
+  end
+
   # GET /clips/new
   # GET /clips/new.json
   def new
