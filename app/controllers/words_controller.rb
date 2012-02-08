@@ -1,6 +1,6 @@
 class WordsController < ApplicationController
   def index
-    @words = Word.all
+    @words = Word.limit(50)
     respond_to do |format|
       format.html
       format.json { render json: @words }
