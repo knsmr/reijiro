@@ -36,4 +36,4 @@
         = link_to "Done", clip_path(@word.clip, clip: {status: 8}), class: 'btn', id: "status8", method: :put, remote: true, data: {type: :json}
 
   %p
-    = simple_format(@word.def)
+    = highlight simple_format(@word.def), @word.entry
