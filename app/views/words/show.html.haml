@@ -8,6 +8,9 @@
     %li{id: "last"}
       Imported:
       = time_ago_in_words(@word.updated_at)
+    %li{id: "shown"}
+      Last checked:
+      = time_ago_in_words(@word.clip.updated_at) if @word.clip
 
   - unless Clip.where(word_id: @word.id).first
     = form_for Clip.new(shown: 1, word_id: @word.id) do |f|
