@@ -83,7 +83,7 @@ class ClipsController < ApplicationController
     respond_to do |format|
       if @clip.update_attributes(params[:clip])
         format.html { redirect_to @clip, notice: 'Clip was successfully updated.' }
-        format.json { head :no_content }
+        format.json { render json: @clip }
       else
         format.html { render action: "edit" }
         format.json { render json: @clip.errors, status: :unprocessable_entity }

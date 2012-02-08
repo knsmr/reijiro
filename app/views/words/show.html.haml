@@ -19,5 +19,21 @@
 
   #entry
     = @word.entry
+
+  - if @word.clip
+    #status-digit
+      = @word.clip.status
+    #status
+      .btn-group
+        = link_to "New", clip_path(@word.clip, clip: {status: 0}), class: 'btn', id: "status0", method: :put, remote: true, data: {type: :json}
+        = link_to "1 Day", clip_path(@word.clip, clip: {status: 1}), class: 'btn', id: "status1", method: :put, remote: true, data: {type: :json}
+        = link_to "3 Days", clip_path(@word.clip, clip: {status: 2}), class: 'btn', id: "status2", method: :put, remote: true, data: {type: :json}
+        = link_to "1 Week", clip_path(@word.clip, clip: {status: 3}), class: 'btn', id: "status3", method: :put, remote: true, data: {type: :json}
+        = link_to "2 Weeks", clip_path(@word.clip, clip: {status: 4}), class: 'btn', id: "status4", method: :put, remote: true, data: {type: :json}
+        = link_to "1 Month", clip_path(@word.clip, clip: {status: 5}), class: 'btn', id: "status5", method: :put, remote: true, data: {type: :json}
+        = link_to "2 Months", clip_path(@word.clip, clip: {status: 6}), class: 'btn', id: "status6", method: :put, remote: true, data: {type: :json}
+        = link_to "4 Months", clip_path(@word.clip, clip: {status: 7}), class: 'btn', id: "status7", method: :put, remote: true, data: {type: :json}
+        = link_to "Done", clip_path(@word.clip, clip: {status: 8}), class: 'btn', id: "status8", method: :put, remote: true, data: {type: :json}
+
   %p
     = simple_format(@word.def)
