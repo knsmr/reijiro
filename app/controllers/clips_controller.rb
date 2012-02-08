@@ -33,6 +33,11 @@ class ClipsController < ApplicationController
     end
   end
 
+  def picknew
+    @word = Word.all.find {|w| !w.clip}
+    render 'words/show'
+  end
+
   def nextup
     @clips = Clip.all.find_all do |clip|
       Time.now - clip.updated_at > INTERVAL[clip.status]
