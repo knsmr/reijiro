@@ -44,8 +44,12 @@ class ClipsController < ApplicationController
     @clip = Clip.all.find do |clip|
       Time.now - clip.updated_at > INTERVAL[clip.status]
     end
-    @word = @clip.word
-    render template: 'words/show'
+    if @clip
+      @word = @clip.word
+      render template: 'words/show'
+    else
+      render text: "Yey! No items.", layout: true
+    end
   end
 
   # GET /clips/new
