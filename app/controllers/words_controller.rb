@@ -15,4 +15,9 @@ class WordsController < ApplicationController
       format.json { render json: @word }
     end
   end
+
+  def search
+    @word = Word.where(entry: params[:query]).first
+    render 'show'
+  end
 end
