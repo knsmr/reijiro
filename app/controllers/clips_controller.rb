@@ -89,6 +89,7 @@ class ClipsController < ApplicationController
   # PUT /clips/1.json
   def update
     @clip = Clip.find(params[:id])
+    @clip.touch # touch the record, even if there's no change
 
     respond_to do |format|
       if @clip.update_attributes(params[:clip])
