@@ -11,9 +11,10 @@ class Word < ActiveRecord::Base
         w
       else
         definition = Eijiro.lookup(word)
+        level = Eijiro.level(word)
         unless definition.empty?
           Word.create(entry: word,
-                      level: 0,
+                      level: level,
                       definition: definition.join("\n"))
 
         else

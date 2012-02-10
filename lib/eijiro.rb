@@ -3,6 +3,7 @@ require 'sqlite3'
 
 class Eijiro
   DICDB = "/Users/ken/Documents/eijiro/bin/database"
+  LEVEL = eval(File.open("/Users/ken/Documents/eijiro/bin/level.txt").read)
   attr_reader :word
 
   def initialize
@@ -32,6 +33,14 @@ class Eijiro
       result = e.lookup(word)
       e.close_db
       result
+    end
+
+    def level(word)
+      level = 0
+      LEVEL.each do |k, v|
+        level = k if v.include?(word)
+      end
+      level
     end
   end
 
