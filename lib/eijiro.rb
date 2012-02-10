@@ -26,6 +26,15 @@ class Eijiro
     @db.close
   end
 
+  class << self
+    def lookup(word)
+      e = Eijiro.new
+      result = e.lookup(word)
+      e.close_db
+      result
+    end
+  end
+
 private
 
   def lookup_entries(word)

@@ -17,7 +17,11 @@ class WordsController < ApplicationController
   end
 
   def search
-    @word = Word.where(entry: params[:query]).first
-    render 'show'
+    query = params[:query]
+    if @word = Word.find_or_lookup(query)
+      render 'show'
+    else
+      render text: "Couldn't find #{query}.", layout: true
+    end
   end
 end
