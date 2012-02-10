@@ -14,7 +14,7 @@ class ClipsController < ApplicationController
   # 1 /clips
   # GET /clips.json
   def index
-    @clips = Clip.order('updated_at DESC')
+    @clips = Clip.order('updated_at DESC').limit(50)
 
     respond_to do |format|
       format.html # index.html.erb
