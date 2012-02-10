@@ -14,7 +14,7 @@ class Word < ActiveRecord::Base
         unless definition.empty?
           Word.create(entry: word,
                       level: 0,
-                      def: definition.join("\n"))
+                      definition: definition.join("\n"))
 
         else
           nil
