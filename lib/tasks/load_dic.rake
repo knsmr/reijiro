@@ -7,11 +7,13 @@ namespace :import do
     e = Eijiro.new
     (1..12).each do |level|
       print "-" * 10 + "level: #{level}\n"
-      dic[level.to_s].shuffle.take(10).each do |word|
-        w = Word.find_or_create_by_entry(word.downcase)
+      dic[level.to_s].each do |word|
+        next if word.include?("'")
+        word.downcase!
+        w = Word.find_or_create_by_entry(word)
         w.update_attributes(entry: word,
                             level: level,
-                            def: e.lookup(word).join("\n"))
+                            definition: e.lookup(word).join("\n"))
         puts word
       end
     end
