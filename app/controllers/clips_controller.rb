@@ -34,11 +34,11 @@ class ClipsController < ApplicationController
   end
 
   def picknew
-    unclipped = Word.where('id not in (select word_id from words inner join clips on words.id = clips.word_id)')
     if params[:level]
-      unclipped = unclipped.where(level: params[:level])
+      @word = Word.unclipped.where(level: params[:level]).first
+    else
+      @word = Word.unclipped.first
     end
-    @word = unclipped.first
     render 'words/show'
   end
 
