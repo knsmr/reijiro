@@ -3,7 +3,7 @@ Reijiro::Application.routes.draw do
   resources :clips
 
   match '/search' => 'words#search', as: 'search'
-  match '/picknew' => 'clips#picknew', as: 'picknew'
+  match '/picknew(/:level)' => 'clips#picknew', as: 'picknew'
   match '/nextup' => 'clips#nextup', as: 'nextup'
   match '/next' => 'clips#next', as: 'next'
   root to: 'clips#index'
