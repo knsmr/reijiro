@@ -1,16 +1,4 @@
 class ClipsController < ApplicationController
-  INTERVAL = {
-    0 => 1.hour,
-    1 => 1.day,
-    2 => 3.days,
-    3 => 1.week,
-    4 => 2.weeks,
-    5 => 1.month,
-    6 => 2.months,
-    7 => 4.months,
-    8 => 8.months
-  }
-
   # 1 /clips
   # GET /clips.json
   def index
@@ -43,16 +31,16 @@ class ClipsController < ApplicationController
   end
 
   def nextup
-    @clips = Clip.all.find_all do |clip|
-      Time.now - clip.updated_at > INTERVAL[clip.status]
-    end
+    @clips = (1..7).map do |status|
+      Clip.overdue(status)
+    end.flatten!
     render 'index'
   end
 
   def next
-    @clip = Clip.all.find do |clip|
-      Time.now - clip.updated_at > INTERVAL[clip.status]
-    end
+    @clip = (1..7).map do |status|
+      Clip.overdue(status).first
+    end.first
     if @clip
       @word = @clip.word
       render template: 'words/show'
