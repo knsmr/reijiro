@@ -16,7 +16,7 @@ class Clip < ActiveRecord::Base
   default_scope order('updated_at DESC')
   default_scope where('status != 8')  # I'm done with it!
 
-  scope :overdue, lambda{|status| where('status = ? AND updated_at + ? < ?', status, INTERVAL[status], Time.now)}
+  scope :overdue, lambda{|status| where('status = ? AND updated_at < ?', status, Time.now - INTERVAL[status])}
 
   class << self
     def overdue_count
