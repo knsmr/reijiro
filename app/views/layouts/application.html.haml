@@ -23,11 +23,11 @@
                 - (1..12).each do |l|
                   = link_to "LEVEL #{l}", picknew_path(l)
             %li
-              %a{:href => "/nextup"} Next Up
+              = due_stats_button
             %li
-              %a{:href => "/next"} Next
+              = link_to "Next", next_path
             %li
-              %a{:href => "/words"} All Words
+              = link_to "Words", words_path
             %li
               %form{class: 'navbar-search pull-left', action: '/search/', method: 'get'}
                 %input{id: 'query', name: 'query', type: 'text', class: 'search-query', placeholder: 'Search'}
