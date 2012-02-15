@@ -2,6 +2,7 @@ class ClipsController < ApplicationController
   # 1 /clips
   # GET /clips.json
   def index
+    # TODO: use join
     @clips = Clip.order('updated_at DESC').limit(50)
 
     respond_to do |format|
