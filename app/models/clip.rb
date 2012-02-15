@@ -17,4 +17,10 @@ class Clip < ActiveRecord::Base
   default_scope where('status != 8')  # I'm done with it!
 
   scope :overdue, lambda{|status| where('status = ? AND updated_at + ? < ?', status, INTERVAL[status], Time.now)}
+
+  class << self
+    def overdue_count
+      (1..7).inject(0){|acc, s| acc += Clip.overdue(s).count}
+    end
+  end
 end
