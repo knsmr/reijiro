@@ -41,7 +41,7 @@ class ClipsController < ApplicationController
   def next
     @clip = (1..7).map do |status|
       Clip.overdue(status).first
-    end.first
+    end.find {|c| !c.blank?}
     if @clip
       @word = @clip.word
       render template: 'words/show'
