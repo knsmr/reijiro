@@ -39,9 +39,12 @@ class ClipsController < ApplicationController
   end
 
   def next
-    @clip = (1..7).map do |status|
-      Clip.overdue(status).first
-    end.find {|c| !c.blank?}
+    # TODO create status table
+    (1..7).each do |status|
+      @clip = Clip.overdue(status).first
+      break unless @clip.blank?
+    end
+
     if @clip
       @word = @clip.word
       render template: 'words/show'
