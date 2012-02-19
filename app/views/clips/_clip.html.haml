@@ -1,5 +1,5 @@
 .item
   .entry
-    = link_to clip.word.entry, word_path(clip.word)
+    = link_to word.entry, word_path(word)
   .definition
-    = truncate(clip.word.definition, length: 60)
+    = truncate(word.definition, length: 60)

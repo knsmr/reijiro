@@ -2,8 +2,7 @@ class ClipsController < ApplicationController
   # 1 /clips
   # GET /clips.json
   def index
-    # TODO: use join
-    @clips = Clip.order('updated_at DESC').limit(50)
+    @words = Word.joins(:clip).order('updated_at DESC').limit(50)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -32,9 +31,11 @@ class ClipsController < ApplicationController
   end
 
   def nextup
+    # TODO: clean this up
     @clips = (1..7).map do |status|
       Clip.overdue(status)
     end.flatten!
+    @words = @clips.map(&:word)
     render 'index'
   end
 
