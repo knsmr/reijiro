@@ -24,4 +24,3 @@ $ ->
     status++
     if status <= 8
       $("#status#{status}").click()
-
