@@ -2,7 +2,6 @@ require 'eijiro'
 
 class Word < ActiveRecord::Base
   has_one :clip, dependent: :destroy
-  default_scope order('updated_at DESC')
 
   scope :unclipped, where('id not in (select word_id from words inner join clips on words.id = clips.word_id)')
 

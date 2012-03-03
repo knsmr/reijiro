@@ -5,9 +5,6 @@
     %li{id: "level"}
       Level:
       = @word.level
-    %li{id: "last"}
-      Imported:
-      = "#{time_ago_in_words(@word.updated_at)} ago"
     %li{id: "shown"}
       Last checked:
       = "#{time_ago_in_words(@word.clip.updated_at)} ago" if @word.clip
