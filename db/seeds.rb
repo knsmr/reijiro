@@ -56,12 +56,13 @@ module EijiroDictionary
       flush
       File.open(@file, "a") {|f| f.write "\nEND TRANSACTION;\n"}
       # execute the generated sqls
-      puts "Writing to the database tables."
-      puts "This process may take a couple of minutes."
+      puts "\nWriting to the database tables."
+      puts "This process may take several minutes."
       database = File.join(Rails.root, %w(db development.sqlite3))
       sqlfile  = File.join(Rails.root, %w(db eijiro.sql))
       system("sqlite3 #{database} \".read #{sqlfile}\"")
       system("rm #{sqlfile}")
+      puts "Done."
     end
 
     def tokenize(str)
@@ -83,8 +84,8 @@ module EijiroDictionary
       [eijiro_path[:eiji], eijiro_path[:reiji]].each do |dic|
         File.open(dic) do |f|
           number_of_lines = %x{ wc -l #{dic}}.split.first.to_i
-          puts "Importing Eijiro file: #{dic}\n (#{number_of_lines} entries)..."
-          pbar = ProgressBar.new("Loading", number_of_lines)
+          puts "Convert Eijiro file: #{dic}\n (#{number_of_lines} entries)..."
+          pbar = ProgressBar.new("Converting", number_of_lines)
 
           f.each_line do |l|
             line = Kconv.kconv(l, Kconv::UTF8, Kconv::SJIS)
