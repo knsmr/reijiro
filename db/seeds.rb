@@ -50,6 +50,13 @@ module EijiroDictionary
     def finish
       flush
       File.open(@file, "a") {|f| f.write "\nEND TRANSACTION;\n"}
+      # execute the generated sqls
+      puts "Writing to the database tables."
+      puts "This process may take a couple of minutes."
+      database = File.join(Rails.root, %w(db development.sqlite3))
+      sqlfile  = File.join(Rails.root, %w(db eijiro.sql))
+      system("sqlite3 #{database} \".read #{sqlfile}\"")
+      system("rm #{sqlfile}")
     end
 
     def tokenize(str)
@@ -95,14 +102,6 @@ module EijiroDictionary
 
         sql.finish
         pbar.finish
-
-        # execute sqls
-        puts "Writing to the database tables."
-        puts "This process may take a couple of minutes."
-        database = File.join(Rails.root, %w(db development.sqlite3))
-        sqlfile  = File.join(Rails.root, %w(db eijiro.sql))
-        system("sqlite3 #{database} \".read #{sqlfile}\"")
-        system("rm #{sqlfile}")
       end
 
       # Write word level info to db/level.yml
