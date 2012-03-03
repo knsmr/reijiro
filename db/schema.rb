@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120227004623) do
+ActiveRecord::Schema.define(:version => 20120227145934) do
 
   create_table "clips", :force => true do |t|
     t.integer  "word_id"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(:version => 20120227004623) do
     t.integer  "shown",      :default => 0
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+  end
+
+  create_table "inverts", :force => true do |t|
+    t.string  "token"
+    t.integer "item_id"
+  end
+
+  create_table "items", :force => true do |t|
+    t.string "entry"
+    t.text   "body"
   end
 
   create_table "words", :force => true do |t|
