@@ -20,9 +20,7 @@ class Word < ActiveRecord::Base
         level = Level.check(query)
         unless definition.empty?
           word = Word.create(entry: query, level: level, definition: definition)
-          word.save
-          clip = word.create_clip(status: 1)
-          clip.save
+          word.create_clip(status: 1)
           word
         else
           nil
