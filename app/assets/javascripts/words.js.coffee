@@ -4,7 +4,7 @@
 $ ->
   jumptoNext = ->
     nextPath = -> window.location = '/next'
-    setTimeout nextPath, 800
+    setTimeout nextPath, 400
 
   highlightButton = ->
     for i in [0..8]
