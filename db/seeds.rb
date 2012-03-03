@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'kconv'
+require 'sqlite3'
 require 'yaml'
 require 'progressbar'
 
@@ -20,6 +21,10 @@ module EijiroDictionary
 
   def normalize(str)
     str.gsub(/[\'\"\-]/, '')
+  end
+
+  def sqlstr(str)
+    "'#{str.gsub(/'/,"''")}'"
   end
 
   class SqlGenerator
@@ -63,10 +68,6 @@ module EijiroDictionary
       str.split(/[ \-\.\'\%\"\/\,]/)
         .map(&:downcase)
         .reject {|s| s.size <= 1 || COMMON_TOKENS.include?(s)}
-    end
-
-    def sqlstr(str)
-      "'#{str.gsub(/'/,"''")}'"
     end
   end
 
@@ -114,16 +115,31 @@ module EijiroDictionary
 
     def import_acl_12000
       puts "Import ALC12000 words..."
+      db = SQLite3::Database.new(File.join(Rails.root, %w(db development.sqlite3)))
       (1..12).each do |level|
-        print "-" * 10 + "level: #{level}\n"
+        pbar = ProgressBar.new("Level #{level}", Eijiro::LEVEL[level].count)
         Eijiro::LEVEL[level].each do |word|
           word.downcase!
-          Word.find_or_lookup(word)
+          pbar.inc
+          eijiro = db.execute("SELECT items.body FROM items WHERE entry = #{sqlstr(word)}")
+          reijiro = db.execute("SELECT items.body FROM items INNER JOIN inverts ON items.id = inverts.item_id WHERE inverts.token = #{sqlstr(word)} AND items.entry != #{sqlstr(word)}")
+          definition = (eijiro + reijiro).join("\n")
+          db.execute("INSERT INTO words (entry, level, definition) VALUES (#{sqlstr(word)}, #{level}, #{sqlstr(definition)});")
         end
+        pbar.finish
       end
+      db.close
     end
   end
 end
 
-EijiroDictionary.load(Reijiro::Application.config.dictionary_path)
+# EijiroDictionary.load(Reijiro::Application.config.dictionary_path)
+
+module Eijiro
+  level_file = File.join(Rails.root, %w(db level.yml))
+  if File.exist?(level_file)
+    LEVEL = YAML::load(File.open(level_file))
+  end
+end
+
 EijiroDictionary.import_acl_12000
