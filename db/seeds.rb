@@ -30,6 +30,16 @@ module EijiroDictionary
       .reject {|s| s.size <= 1 || COMMON_TOKENS.include?(s)}
   end
 
+  def write_to_dbtables(entry, body)
+    # Write eijiro entries to items table
+    i = Item.create(entry: entry, body: body)
+
+    # Write inverted index to inverts table
+    tokenize(entry).each do |t|
+      Invert.create(token: t, item_id: i.id)
+    end
+  end
+
   class << self
     include EijiroDictionary
 
@@ -51,15 +61,8 @@ module EijiroDictionary
               level_table[level.to_i] ||= []
               level_table[level.to_i] << entry
             end
-            text = line.chomp
-
-            # Write eijiro entries to items table
-            i = Item.create(entry: entry.downcase, body: text)
-
-            # Write inverted index to inverts table
-            tokenize(entry).each do |t|
-              Invert.create(token: t, item_id: i.id)
-            end
+            body = line.chomp
+            write_to_dbtables(entry.downcase, body)
             pbar.inc
           end
         end
