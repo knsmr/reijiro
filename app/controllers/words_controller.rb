@@ -19,6 +19,7 @@ class WordsController < ApplicationController
   def search
     query = params[:query]
     if @word = Word.find_or_lookup(query)
+      flash.now[:success] = "Found and clipped!"
       render 'show'
     else
       render text: "Couldn't find #{query}.", layout: true
@@ -31,6 +32,7 @@ class WordsController < ApplicationController
       words.each do |word|
         @words << Word.find_or_lookup(word)
       end
+      flash.now[:success] = "Imported 10 words below from level#{params[:level]}."
       render 'index'
     else
       render text: "No more level #{level} words to import.", layout: true

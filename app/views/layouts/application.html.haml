@@ -29,4 +29,5 @@
                 %input{id: 'query', name: 'query', type: 'text', class: 'search-query', placeholder: 'Search'}
 
     .container
+      =render :partial => "shared/flash_messages", :locals => {:flash => flash}
       = yield
