@@ -9,6 +9,10 @@ gem 'sqlite3'
 gem 'haml-rails'
 gem 'ruby-progressbar'
 
+group :development do
+  gem 'awesome_print'
+end
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
