@@ -24,4 +24,15 @@ class WordsController < ApplicationController
       render text: "Couldn't find #{query}.", layout: true
     end
   end
+
+  def import_from_alc12000
+    if words = Level.yet_to_import(params[:level])
+      words.each do |word|
+        Word.find_or_lookup(word)
+      end
+      redirect_to clips_path, notice: "Imported: #{words}"
+    else
+      render text: "No more level #{level} words to import.", layout: true
+    end
+  end
 end
