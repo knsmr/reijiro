@@ -19,7 +19,7 @@
 
   #entry
     = @word.entry
-  %div{class: 'next btn btn-primary'} Next
+  %div.next.btn.btn-primary Next
   %p
 
   - if @word.clip
@@ -40,5 +40,5 @@
   %p
     = highlight simple_format(@word.definition), @word.entry
 
-    %div{class: 'next btn btn-primary'} Next
+    %div.next.btn.btn-primary Next
     %a{href: "javascript:scroll(0,0)", class: 'btn'} Back to top
