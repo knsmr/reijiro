@@ -4,31 +4,31 @@ class Word < ActiveRecord::Base
   scope :unclipped, where('id not in (select word_id from words inner join clips on words.id = clips.word_id)')
 
   class << self
-    def lookup(word)
-      word.downcase!
-      items = Item.where(entry: word).all
-      items += Invert.where(token: word).map(&:item)
+    def lookup(query)
+      query.downcase!
+      items = Item.where(entry: query).all
+      items += Invert.where(token: query).map(&:item)
       items.uniq.map(&:body).join("\n")
     end
 
-    def find_or_lookup(word)
-      word.downcase!
-      if w = Word.find_by_entry(word)
-        w
+    def find_or_lookup(query)
+      query.downcase!
+      if word = Word.find_by_entry(query)
+        word
       else
-        definition = lookup(word)
-        l = Level.where(word: word)
+        definition = lookup(query)
+        l = Level.where(word: query)
         if l.empty?
           level = 0
         else
           l.first.level
         end
         unless definition.empty?
-          w = Word.create(entry: word, level: level, definition: definition)
-          w.save
-          c = w.create_clip(status: 1)
-          c.save
-          w
+          word = Word.create(entry: query, level: level, definition: definition)
+          word.save
+          clip = word.create_clip(status: 1)
+          clip.save
+          word
         else
           nil
         end
