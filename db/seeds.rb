@@ -15,6 +15,7 @@ module EijiroDictionary
         eijiro_path[:reiji] = File.join(path, file)
       end
     end
+    raise "No dictionary files found" if eijiro_path.empty?
     eijiro_path
   end
 
@@ -34,14 +35,11 @@ module EijiroDictionary
     def load(path)
       eijiro_path = find_dictionaries(path)
       level_table = {}
-      tokens = {}
 
       File.open(eijiro_path[:eiji]) do |f|
-        num = 0
         f.each_line do |l|
           line = Kconv.kconv(l, Kconv::UTF8, Kconv::SJIS)
           if line =~ /■(.*?)(?:  ?\{.*?\})? : (【レベル】([0-9]+))?/
-            num += 1
             entry = $1
             level = $3 ? $3 : 0
             if level != 0
@@ -50,20 +48,20 @@ module EijiroDictionary
             end
             text = line.chomp
 
-            # TBD: Write to items table
-            #
+            # Write eijiro entries to items table
+            i = Item.create(entry: entry.downcase, body: text)
+            puts i.entry
 
+            # Write inverted index to inverts table
             tokenize(entry).each do |t|
-              tokens[t] ||= []
-              tokens[t] << num
+              Invert.create(token: t, item_id: i.id)
             end
           end
         end
       end
 
-      # Flush tokens to inverted index
-
-      # Write level.yml
+      # Write word level info to level.yml
+      puts "writing to db/level.yml"
       File.open(File.join(Rails.root, %w(db level.yml)), "w") do |f|
         f.write level_table.to_yaml
       end
