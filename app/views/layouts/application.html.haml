@@ -23,7 +23,7 @@
                 - (1..12).each do |l|
                   = link_to "LEVEL #{l}", picknew_path(l)
             %li
-              = link_to "Clips (#{Clip.count})", clips_path
+              = link_to "Clips (#{Clip.undone.count}/#{Clip.count})", clips_path
             %li
               = due_stats_button
             %li
