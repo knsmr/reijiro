@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120227145934) do
+ActiveRecord::Schema.define(:version => 20120228054611) do
 
   create_table "clips", :force => true do |t|
     t.integer  "word_id"
@@ -27,10 +27,14 @@ ActiveRecord::Schema.define(:version => 20120227145934) do
     t.integer "item_id"
   end
 
+  add_index "inverts", ["token"], :name => "index_inverts_on_token"
+
   create_table "items", :force => true do |t|
     t.string "entry"
     t.text   "body"
   end
+
+  add_index "items", ["entry"], :name => "index_items_on_entry"
 
   create_table "words", :force => true do |t|
     t.string  "entry"
