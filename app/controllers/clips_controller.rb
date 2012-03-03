@@ -23,11 +23,17 @@ class ClipsController < ApplicationController
 
   def picknew
     if params[:level]
-      @word = Word.unclipped.where(level: params[:level]).first
+      @word = Word.unclipped.where(level: params[:level])
     else
-      @word = Word.unclipped.first
+      @word = Word.unclipped
     end
-    render 'words/show'
+
+    unless @word.empty?
+      @word = @word.first
+      render 'words/show'
+    else
+      render text: "No words available.", layout: true
+    end
   end
 
   def nextup
