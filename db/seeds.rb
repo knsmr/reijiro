@@ -55,14 +55,14 @@ module EijiroDictionary
         f.each_line do |l|
           line = Kconv.kconv(l, Kconv::UTF8, Kconv::SJIS)
           if line =~ /■(.*?)(?:  ?\{.*?\})? : (【レベル】([0-9]+))?/
-            entry = $1
+            entry = $1.downcase
             level = $3 ? $3 : 0
             if level != 0
               level_table[level.to_i] ||= []
               level_table[level.to_i] << entry
             end
             body = line.chomp
-            write_to_dbtables(entry.downcase, body)
+            write_to_dbtables(entry, body)
             pbar.inc
           end
         end
