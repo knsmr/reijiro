@@ -95,6 +95,14 @@ module EijiroDictionary
 
         sql.finish
         pbar.finish
+
+        # execute sqls
+        puts "Writing to the database tables."
+        puts "This process may take a couple of minutes."
+        database = File.join(Rails.root, %w(db development.sqlite3))
+        sqlfile  = File.join(Rails.root, %w(db eijiro.sql))
+        system("sqlite3 #{database} \".read #{sqlfile}\"")
+        system("rm #{sqlfile}")
       end
 
       # Write word level info to db/level.yml

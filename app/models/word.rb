@@ -19,7 +19,7 @@ class Word < ActiveRecord::Base
         w
       else
         definition = lookup(word)
-        level = Eijiro.level(word)
+        level = Eijiro::LEVEL.find {|k, v| v.include?(word)}.first
         unless definition.empty?
           Word.create(entry: word, level: level, definition: definition)
         else
