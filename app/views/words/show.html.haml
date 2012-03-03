@@ -19,7 +19,7 @@
 
   #entry
     = @word.entry
-  %div.next.btn.btn-primary Next
+  %div.next.btn.btn-primary Check and proceed
   = link_to "Delete", @word, class: 'btn', confirm: "Delete #{@word.entry}?", method: :delete
   %p
 
@@ -41,5 +41,5 @@
   %p
     = highlight simple_format(@word.definition), @word.entry
 
-    %div.next.btn.btn-primary Next
+    %div.next.btn.btn-primary Check and proceed
     %a{href: "javascript:scroll(0,0)", class: 'btn'} Back to top
