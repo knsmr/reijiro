@@ -20,6 +20,7 @@
   #entry
     = @word.entry
   %div.next.btn.btn-primary Next
+  = link_to "Delete", @word, class: 'btn', confirm: "Delete #{@word.entry}?", method: :delete
   %p
 
   - if @word.clip

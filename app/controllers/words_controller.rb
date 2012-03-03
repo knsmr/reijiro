@@ -19,6 +19,16 @@ class WordsController < ApplicationController
   def stats
   end
 
+  def destroy
+    @word = Word.find(params[:id])
+    @word.destroy
+
+    respond_to do |format|
+      format.html { redirect_to words_url }
+      format.json { head :no_content }
+    end
+  end
+
   def search
     query = params[:query]
     if @word = Word.find_or_lookup(query)
