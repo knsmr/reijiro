@@ -10,32 +10,6 @@ class ClipsController < ApplicationController
     end
   end
 
-  # GET /clips/1
-  # GET /clips/1.json
-  def show
-    @clip = Clip.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @clip }
-    end
-  end
-
-  def picknew
-    if params[:level]
-      @word = Word.unclipped.where(level: params[:level])
-    else
-      @word = Word.unclipped
-    end
-
-    unless @word.empty?
-      @word = @word.first
-      render 'words/show'
-    else
-      render text: "No words available.", layout: true
-    end
-  end
-
   def nextup
     # TODO: clean this up
     @clips = (0..7).map do |status|
@@ -57,34 +31,6 @@ class ClipsController < ApplicationController
       render template: 'words/show'
     else
       render text: "Yey! No items.", layout: true
-    end
-  end
-
-  # GET /clips/new
-  # GET /clips/new.json
-  def new
-    @clip = Clip.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @clip }
-    end
-  end
-
-  # GET /clips/1/edit
-  def edit
-    @clip = Clip.find(params[:id])
-  end
-
-  # POST /clips
-  # POST /clips.json
-  def create
-    @clip = Clip.new(params[:clip])
-
-    if @clip.save
-      redirect_to word_path(@clip.word) , flash: {notice: "added #{@clip.word.entry}"}
-    else
-      redirect_to word_path(@clip.word), flash: {error: "Error"}
     end
   end
 
