@@ -11,6 +11,9 @@ end
 
 module Reijiro
   class Application < Rails::Application
+    # Set the path to EIJI-128.txt, etc.
+    config.dictionary_path = "/Users/ken/Documents/eijiro/Eijiro6T"
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
