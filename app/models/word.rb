@@ -24,7 +24,11 @@ class Word < ActiveRecord::Base
           l.first.level
         end
         unless definition.empty?
-          Word.create(entry: word, level: level, definition: definition)
+          w = Word.create(entry: word, level: level, definition: definition)
+          w.save
+          c = w.create_clip(status: 1)
+          c.save
+          w
         else
           nil
         end
