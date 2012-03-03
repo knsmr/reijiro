@@ -2,7 +2,7 @@ class Clip < ActiveRecord::Base
   belongs_to :word
   validates_uniqueness_of :word_id
   INTERVAL = {
-    0 => 1.hour,
+    0 => 0.second,
     1 => 1.day,
     2 => 3.days,
     3 => 1.week,
@@ -21,7 +21,7 @@ class Clip < ActiveRecord::Base
 
   class << self
     def overdue_count
-      (1..7).inject(0){|acc, s| acc += Clip.overdue(s).count}
+      (0..7).inject(0){|acc, s| acc += Clip.overdue(s).count}
     end
   end
 end

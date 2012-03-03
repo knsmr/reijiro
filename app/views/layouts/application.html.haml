@@ -27,8 +27,6 @@
             %li
               = due_stats_button
             %li
-              = link_to "Words (#{Word.count})", words_path
-            %li
               %form{class: 'navbar-search pull-left', action: '/search/', method: 'get'}
                 %input{id: 'query', name: 'query', type: 'text', class: 'search-query', placeholder: 'Search'}
 

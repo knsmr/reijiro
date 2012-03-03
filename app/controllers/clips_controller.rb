@@ -38,7 +38,7 @@ class ClipsController < ApplicationController
 
   def nextup
     # TODO: clean this up
-    @clips = (1..7).map do |status|
+    @clips = (0..7).map do |status|
       Clip.overdue(status)
     end.flatten!
     @words = @clips.map(&:word)
@@ -47,7 +47,7 @@ class ClipsController < ApplicationController
 
   def next
     # TODO create status table
-    (1..7).each do |status|
+    (0..7).each do |status|
       @clip = Clip.overdue(status).first
       break unless @clip.blank?
     end
