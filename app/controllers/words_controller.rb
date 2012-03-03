@@ -27,6 +27,7 @@ class WordsController < ApplicationController
   end
 
   def import_from_alc12000
+    # TODO: This is slow. Should I have used raw SQL instead?
     @words = []
     if words = Level.yet_to_import(params[:level])
       words.each do |word|
