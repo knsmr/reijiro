@@ -17,12 +17,7 @@ class Word < ActiveRecord::Base
         word
       else
         definition = lookup(query)
-        l = Level.where(word: query)
-        if l.empty?
-          level = 0
-        else
-          l.first.level
-        end
+        level = Level.check(query)
         unless definition.empty?
           word = Word.create(entry: query, level: level, definition: definition)
           word.save
