@@ -79,30 +79,32 @@ module EijiroDictionary
       sql = SqlGenerator.new
       id = 0
 
-      File.open(eijiro_path[:eiji]) do |f|
-        number_of_lines = %x{ wc -l #{eijiro_path[:eiji]}}.split.first.to_i
-        puts "Importing Eijiro dictionary files(#{number_of_lines} entries)..."
-        pbar = ProgressBar.new("Loading", number_of_lines)
+      [eijiro_path[:eiji], eijiro_path[:reiji]].each do |dic|
+        File.open(dic) do |f|
+          number_of_lines = %x{ wc -l #{dic}}.split.first.to_i
+          puts "Importing Eijiro file: #{dic}\n (#{number_of_lines} entries)..."
+          pbar = ProgressBar.new("Loading", number_of_lines)
 
-        f.each_line do |l|
-          line = Kconv.kconv(l, Kconv::UTF8, Kconv::SJIS)
-          if line =~ /■(.*?)(?:  ?\{.*?\})? : (【レベル】([0-9]+))?/
-            id += 1
-            entry = $1.downcase
-            level = $3 ? $3 : 0
-            if level != 0
-              level_table[level.to_i] ||= []
-              level_table[level.to_i] << entry
+          f.each_line do |l|
+            line = Kconv.kconv(l, Kconv::UTF8, Kconv::SJIS)
+            line.gsub!(/◆.+$/, '')
+            if line =~ /■(.*?)(?:  ?\{.*?\})? : (【レベル】([0-9]+))?/
+              id += 1
+              entry = $1.downcase
+              level = $3 ? $3 : 0
+              if level != 0
+                level_table[level.to_i] ||= []
+                level_table[level.to_i] << entry
+              end
+              body = line.chomp
+              sql.generate(id, entry, body)
+              pbar.inc
             end
-            body = line.chomp
-            sql.generate(id, entry, body)
-            pbar.inc
           end
+          pbar.finish
         end
-
-        sql.finish
-        pbar.finish
       end
+      sql.finish
 
       # Write word level info to db/level.yml
       File.open(File.join(Rails.root, %w(db level.yml)), "w") do |f|
