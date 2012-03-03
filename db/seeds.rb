@@ -111,8 +111,19 @@ module EijiroDictionary
         f.write level_table.to_yaml
       end
     end
-  end
 
+    def import_acl_12000
+      puts "Import ALC12000 words..."
+      (1..12).each do |level|
+        print "-" * 10 + "level: #{level}\n"
+        Eijiro::LEVEL[level].each do |word|
+          word.downcase!
+          Word.find_or_lookup(word)
+        end
+      end
+    end
+  end
 end
 
 EijiroDictionary.load(Reijiro::Application.config.dictionary_path)
+EijiroDictionary.import_acl_12000
