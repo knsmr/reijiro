@@ -25,6 +25,8 @@
                 - (1..12).each do |l|
                   = link_to "LEVEL #{l}", importalc_path(l)
             %li
+              = link_to "Stats", stats_path
+            %li
               %form{class: 'navbar-search pull-left', action: '/search/', method: 'get'}
                 %input{id: 'query', name: 'query', type: 'text', class: 'search-query', placeholder: 'Search'}
 

@@ -16,6 +16,7 @@ class Clip < ActiveRecord::Base
   default_scope order('updated_at DESC')
   scope :done, where('status == 8')  # I'm done with the word!
   scope :undone, where('status != 8')  # I'm done with the word!
+  scope :level, lambda{|level| joins(:word).where('words.level == ?', level)}
 
   scope :overdue, lambda{|status| where('status = ? AND updated_at < ?', status, Time.now - INTERVAL[status])}
 

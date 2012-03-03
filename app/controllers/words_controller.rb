@@ -16,6 +16,9 @@ class WordsController < ApplicationController
     end
   end
 
+  def stats
+  end
+
   def search
     query = params[:query]
     if @word = Word.find_or_lookup(query)
