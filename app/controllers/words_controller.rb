@@ -26,11 +26,12 @@ class WordsController < ApplicationController
   end
 
   def import_from_alc12000
+    @words = []
     if words = Level.yet_to_import(params[:level])
       words.each do |word|
-        Word.find_or_lookup(word)
+        @words << Word.find_or_lookup(word)
       end
-      redirect_to clips_path, notice: "Imported: #{words}"
+      render 'index'
     else
       render text: "No more level #{level} words to import.", layout: true
     end
