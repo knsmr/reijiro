@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'kconv'
 require 'yaml'
+require 'progressbar'
 
 module EijiroDictionary
   COMMON_TOKENS = %w(i ll  mr ok a about after all also an and any are as at back be because been before but by can can t come could day did didn do don down even first for from get give go going good got great had has have he he her here hey him his how if in into is it its just know like little look made make man may me mean men more most much must my new no not now of oh okay on one only or other our out over person really right said say see she should so some something such take tell than that that the their them then there these they think this time to two up upon us use very want was way we well were what when which who why will with work would yeah year yes you you re your)
@@ -37,6 +38,10 @@ module EijiroDictionary
       level_table = {}
 
       File.open(eijiro_path[:eiji]) do |f|
+        number_of_lines = %x{ wc -l #{eijiro_path[:eiji]}}.split.first.to_i
+        puts "Importing Eijiro dictionary files(#{number_of_lines} entries)..."
+        pbar = ProgressBar.new("Loading", number_of_lines)
+
         f.each_line do |l|
           line = Kconv.kconv(l, Kconv::UTF8, Kconv::SJIS)
           if line =~ /■(.*?)(?:  ?\{.*?\})? : (【レベル】([0-9]+))?/
@@ -50,18 +55,19 @@ module EijiroDictionary
 
             # Write eijiro entries to items table
             i = Item.create(entry: entry.downcase, body: text)
-            puts i.entry
 
             # Write inverted index to inverts table
             tokenize(entry).each do |t|
               Invert.create(token: t, item_id: i.id)
             end
+            pbar.inc
           end
         end
+
+        pbar.finish
       end
 
-      # Write word level info to level.yml
-      puts "writing to db/level.yml"
+      # Write word level info to db/level.yml
       File.open(File.join(Rails.root, %w(db level.yml)), "w") do |f|
         f.write level_table.to_yaml
       end
