@@ -19,6 +19,8 @@
 
   #entry
     = @word.entry
+  %div{class: 'next btn btn-primary'} Next
+  %p
 
   - if @word.clip
     #status-digit
@@ -34,5 +36,9 @@
         = status_button "2 Months", 6
         = status_button "4 Months", 7
         = status_button "Done", 8
+
   %p
     = highlight simple_format(@word.definition), @word.entry
+
+    %div{class: 'next btn btn-primary'} Next
+    %a{href: "javascript:scroll(0,0)", class: 'btn'} Back to top
