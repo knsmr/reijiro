@@ -16,9 +16,6 @@ class WordsController < ApplicationController
     end
   end
 
-  def stats
-  end
-
   def destroy
     @word = Word.find(params[:id])
     @word.destroy
