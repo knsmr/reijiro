@@ -12,19 +12,20 @@
       - (1..12).each do |l|
         %tr
           %td= "Level #{l}"
-          %td= "#{Clip.level(l).undone.count}"
-          %td= "#{Clip.level(l).done.count}"
-          %td= "#{Level.where(level: l).count - Clip.level(l).count}"
-          %td= "#{Level.where(level: l).count}"
+          %td= @stats[l][:undone]
+          %td= @stats[l][:done]
+          %td= @stats[l][:remain]
+          %td= @stats[l][:total]
+
       %tr
         %td= "Extra"
-        %td= "#{Clip.level(0).count}"
-        %td= "#{Clip.level(0).done.count}"
+        %td= @stats['0'][:undone]
+        %td= @stats['0'][:done]
         %td -
         %td -
       %tr
         %td Total
-        %td= "#{Clip.undone.count}"
-        %td= "#{Clip.done.count}"
-        %td= "#{Level.count - Clip.count}"
-        %td= "#{Level.count}"
+        %td= @stats['total'][:undone]
+        %td= @stats['total'][:done]
+        %td= @stats['total'][:remain]
+        %td= @stats['total'][:total]

@@ -63,6 +63,27 @@ class ClipsController < ApplicationController
     end
   end
 
+  # GET /stats/
+  # GET /stats.json
   def stats
+    @stats = {}
+    (1..12).each do |l|
+      undone = Clip.level(l).undone.count
+      done   = Clip.level(l).done.count
+      total  = Level.where(level: l).count
+      remain = total - (undone + done)
+      @stats[l] = {undone: undone, done: done, total: total, remain: remain}
+    end
+    @stats['0'] = {undone: Clip.level(0).count, done: Clip.level(0).done.count}
+    @stats['total'] = {
+      undone: Clip.undone.count,
+      done: Clip.done.count,
+      ramin: Level.count - Clip.count,
+      total: Level.count }
+
+    respond_to do |format|
+      format.html
+      format.json { render json: @stats }
+    end
   end
 end
