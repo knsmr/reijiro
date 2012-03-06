@@ -38,7 +38,7 @@
         = status_button "Done", 8
 
   %p
-    = highlight simple_format(@word.definition), @word.entry
+    = raw(preprocess @word)
 
     %div.next.btn.btn-primary Check and proceed
     %a{href: "javascript:scroll(0,0)", class: 'btn'} Back to top
