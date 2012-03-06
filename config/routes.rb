@@ -1,5 +1,5 @@
 Reijiro::Application.routes.draw do
-  resources :words, only: [:index, :show, :destroy]
+  resources :words, except: [:new]
   resources :clips, only: [:index, :update, :destroy]
 
   match '/search' => 'words#search', as: 'search'

@@ -16,6 +16,24 @@ class WordsController < ApplicationController
     end
   end
 
+  def edit
+    @word = Word.find(params[:id])
+  end
+
+  def update
+    @word = Word.find(params[:id])
+
+    respond_to do |format|
+      if @word.update_attributes(params[:word])
+        format.html { redirect_to @word, notice: 'Word was successfully updated.' }
+        format.json { head :no_content }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @word.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def destroy
     @word = Word.find(params[:id])
     @word.destroy

@@ -2,6 +2,10 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $ ->
+  # widen textarea for words#edit form
+  $('#word_definition').css('width', '90%')
+
+  # redirect action to /next
   jumptoNext = ->
     nextPath = -> window.location = '/next'
     setTimeout nextPath, 400

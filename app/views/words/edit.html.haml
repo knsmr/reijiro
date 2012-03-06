@@ -1,0 +1,18 @@
+= form_for(@word) do |f|
+  - if @word.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@word.errors.count, "error")
+        prohibited this word from being saved:
+      %ul
+        - @word.errors.full_messages.each do |msg|
+          %li= msg
+  #word
+    #entry
+      = @word.entry
+  %h2
+    Edit the entries below:
+  .field
+    = f.text_area :definition, size: '60x40'
+  .actions
+    = f.submit

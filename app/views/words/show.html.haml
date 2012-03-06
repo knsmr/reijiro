@@ -18,6 +18,7 @@
   #entry
     = @word.entry
   %div.next.btn.btn-primary Check and proceed
+  = link_to "Edit", edit_word_path(@word), class: 'btn'
   = link_to "Delete", @word, class: 'btn', confirm: "Delete #{@word.entry}?", method: :delete
   %p
 
