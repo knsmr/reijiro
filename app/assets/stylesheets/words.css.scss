@@ -39,13 +39,19 @@
 	border-radius: 5px;
     }
 
-    ul li {
+    ul {
 	list-style-type: none;
-	color: #666666;
-	font-size: 16px;
+	color: #888888;
+	font-size: 14px;
 	font-weight: bold;
-	padding: 0px 10px 10px 0px;
-	float: left;
+	padding-bottom: 5px;
+	overflow: hidden;
+	li {
+	    margin-left: -2px;
+	    border-left: 1px solid black;
+	    padding: 0px 10px 0px 10px;
+	    float: left;
+	}
     }
 
     #status-digit {
