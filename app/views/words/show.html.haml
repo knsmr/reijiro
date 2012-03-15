@@ -1,9 +1,9 @@
 #word
   %ul
-    %li{id: "level"}
+    %li#level
       Level:
       = @word.level
-    %li{id: "shown"}
+    %li#shown
       Last checked:
       = "#{time_ago_in_words(@word.clip.updated_at)} ago" if @word.clip
 
