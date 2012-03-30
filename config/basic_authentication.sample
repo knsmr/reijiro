@@ -1,0 +1,11 @@
+# To use basic authentication:
+#
+# 1. Uncomment : config.basic_auth = ['username', 'password']
+# 2. Set useranme and password
+# 3. Rename this file from basic_authentication.sample to basic_authentication.rb
+
+module Reijiro
+  class Application < Rails::Application
+#    config.basic_auth = ['username', 'password']
+  end
+end
