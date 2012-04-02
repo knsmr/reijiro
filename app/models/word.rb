@@ -1,3 +1,6 @@
+require 'open-uri'
+require 'nokogiri'
+
 class Word < ActiveRecord::Base
   has_one :clip, dependent: :destroy
 
@@ -18,14 +21,26 @@ class Word < ActiveRecord::Base
       else
         definition = lookup(query)
         level = Level.check(query)
+        thesaurus = lookup_thesaurus(query)
         unless definition.empty?
-          word = Word.create(entry: query, level: level, definition: definition)
+          word = Word.create(entry: query,
+                             level: level,
+                             thesaurus: thesaurus,
+                             definition: definition)
           word.create_clip(status: 0)
           word
         else
           nil
         end
       end
+    end
+
+    # search the query on the thesaurus.com and paste part of the
+    # result.
+    def lookup_thesaurus(query)
+      query = query.gsub(/ /, '+')
+      html = Nokogiri::HTML(open("http://thesaurus.com/browse/#{query}").read)
+      html.css('.sep_top')[0].to_s.gsub(/<\/a>/, '').gsub(/<a[^>]+>/, '')
     end
   end
 end

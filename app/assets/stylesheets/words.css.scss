@@ -32,11 +32,23 @@
     #entry {
 	font-size: 32px;
 	text-shadow: 1px 1px 1px #333333;
+	background-color: #dddddd;
+	padding: 10px 0px 20px 5px;
+	margin-bottom: 10px;
+	clear: both;
+	border-radius: 5px;
+    }
+
+    #thesaurus {
 	background-color: #eeeeee;
 	padding: 10px 0px 20px 5px;
 	margin-bottom: 10px;
 	clear: both;
 	border-radius: 5px;
+	.link {
+	    float: right;
+	    font-weight: bold;
+	}
     }
 
     ul {
