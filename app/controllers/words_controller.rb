@@ -57,11 +57,11 @@ class WordsController < ApplicationController
   def import_from_alc12000
     # TODO: This is slow. Should I have used raw SQL instead?
     @words = []
-    if words = Level.yet_to_import(params[:level])
+    if words = Level.yet_to_import(params[:level], 5)
       words.each do |word|
         @words << Word.find_or_lookup(word)
       end
-      flash.now[:success] = "Imported 10 words below from level#{params[:level]}."
+      flash.now[:success] = "Imported 5 words below from level#{params[:level]}."
       render 'index'
     else
       render text: "No more level #{level} words to import.", layout: true
