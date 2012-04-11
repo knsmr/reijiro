@@ -28,3 +28,8 @@ $ ->
     status++
     if status <= 8
       $("#status#{status}").click()
+
+  $('#show').click ->
+    $(this).hide()
+    $('#body').show()
+

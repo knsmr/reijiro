@@ -29,28 +29,6 @@
 #word {
     padding: 0 0 0 10px;
 
-    #entry {
-	font-size: 32px;
-	text-shadow: 1px 1px 1px #333333;
-	background-color: #dddddd;
-	padding: 10px 0px 20px 5px;
-	margin-bottom: 10px;
-	clear: both;
-	border-radius: 5px;
-    }
-
-    #thesaurus {
-	background-color: #eeeeee;
-	padding: 10px 0px 20px 5px;
-	margin-bottom: 10px;
-	clear: both;
-	border-radius: 5px;
-	.link {
-	    float: right;
-	    font-weight: bold;
-	}
-    }
-
     ul {
 	list-style-type: none;
 	color: #888888;
@@ -66,11 +44,42 @@
 	}
     }
 
-    #status-digit {
-	display: none;
+    #entry {
+	font-size: 32px;
+	text-shadow: 1px 1px 1px #333333;
+	background-color: #dddddd;
+	padding: 10px 0px 20px 5px;
+	margin-bottom: 10px;
+	clear: both;
+	border-radius: 5px;
     }
 
-    #status {
-	clear: both;
+    #body {
+	display: none;
+
+	#thesaurus {
+	    background-color: #eeeeee;
+	    padding: 10px 0px 20px 5px;
+	    margin-bottom: 10px;
+	    clear: both;
+	    border-radius: 5px;
+	    display: none;
+	    .link {
+		float: right;
+		font-weight: bold;
+	    }
+	}
+
+	#definition {
+	    padding-top: 1em;
+	}
+
+	#status-digit {
+	    display: none;
+	}
+
+	#status {
+	    clear: both;
+	}
     }
 }

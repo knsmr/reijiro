@@ -22,34 +22,37 @@
   #entry
     = @word.entry
 
-  #thesaurus
-    - if @word.thesaurus
-      =raw @word.thesaurus
-    .link
-      = link_to 'Thesaurus.com', 'http://thesaurus.com/'
+  %div.btn.btn-large#show show
 
-  %div.next.btn.btn-primary Check and proceed
-  = link_to "Edit", edit_word_path(@word), class: 'btn'
-  = link_to "Delete", @word, class: 'btn', confirm: "Delete #{@word.entry}?", method: :delete
-  %p
+  #body
+    #thesaurus
+      - if @word.thesaurus
+        =raw @word.thesaurus
+      .link
+        = link_to 'Thesaurus.com', 'http://thesaurus.com/'
 
-  - if @word.clip
-    #status-digit
-      = @word.clip.status
-    #status
-      .btn-group
-        = status_button "New", 0
-        = status_button "1 Day", 1
-        = status_button "3 Days", 2
-        = status_button "1 Week", 3
-        = status_button "2 Weeks", 4
-        = status_button "1 Month", 5
-        = status_button "2 Months", 6
-        = status_button "4 Months", 7
-        = status_button "Done", 8
+    %div.next.btn.btn-primary.btn-large Check and proceed
+    = link_to "Edit", edit_word_path(@word), class: 'btn'
+    = link_to "Delete", @word, class: 'btn', confirm: "Delete #{@word.entry}?", method: :delete
+    %p
 
-  %p
-    = raw(preprocess @word)
+    - if @word.clip
+      #status-digit
+        = @word.clip.status
+      #status
+        .btn-group
+          = status_button "New", 0
+          = status_button "1 Day", 1
+          = status_button "3 Days", 2
+          = status_button "1 Week", 3
+          = status_button "2 Weeks", 4
+          = status_button "1 Month", 5
+          = status_button "2 Months", 6
+          = status_button "4 Months", 7
+          = status_button "Done", 8
 
-    %div.next.btn.btn-primary Check and proceed
-    %a{href: "javascript:scroll(0,0)", class: 'btn'} Back to top
+    #definition
+      = raw(preprocess @word)
+
+      %div.next.btn.btn-primary Check and proceed
+      %a{href: "javascript:scroll(0,0)", class: 'btn'} Back to top
