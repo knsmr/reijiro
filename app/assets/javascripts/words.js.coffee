@@ -29,8 +29,11 @@ $ ->
     if status <= 8
       $("#status#{status}").click()
 
+  # show button
   $('#show').click ->
     $(this).hide()
     $('#body').show()
 
-
+  # show the body if the action is not 'clips#next'
+  if(!(/next/.test(window.location.pathname)))
+    $('#body').show()

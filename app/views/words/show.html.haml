@@ -22,7 +22,8 @@
   #entry
     = @word.entry
 
-  %div.btn.btn-large#show show
+  - if params[:action] == "next"
+    %div.btn.btn-large#show show
 
   #body
     %div.next.btn.btn-primary.btn-large Check and proceed
