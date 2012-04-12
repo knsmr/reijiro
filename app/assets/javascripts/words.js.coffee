@@ -8,7 +8,7 @@ $ ->
   # redirect action to /next
   jumptoNext = ->
     nextPath = -> window.location = '/next'
-    setTimeout nextPath, 400
+    setTimeout nextPath, 200
 
   highlightButton = ->
     for i in [0..8]
