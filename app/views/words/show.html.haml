@@ -25,12 +25,6 @@
   %div.btn.btn-large#show show
 
   #body
-    #thesaurus
-      - if @word.thesaurus
-        =raw @word.thesaurus
-      .link
-        = link_to 'Thesaurus.com', 'http://thesaurus.com/'
-
     %div.next.btn.btn-primary.btn-large Check and proceed
     = link_to "Edit", edit_word_path(@word), class: 'btn'
     = link_to "Delete", @word, class: 'btn', confirm: "Delete #{@word.entry}?", method: :delete
@@ -50,6 +44,12 @@
           = status_button "2 Months", 6
           = status_button "4 Months", 7
           = status_button "Done", 8
+
+    #thesaurus
+      - if @word.thesaurus
+        =raw @word.thesaurus
+      .link
+        = link_to 'Thesaurus.com', 'http://thesaurus.com/'
 
     #definition
       = raw(preprocess @word)
