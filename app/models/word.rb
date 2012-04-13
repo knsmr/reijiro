@@ -8,14 +8,14 @@ class Word < ActiveRecord::Base
 
   class << self
     def lookup(query)
-      query.downcase!
+      query = normalize_query(query)
       items = Item.where(entry: query).all
       items += Invert.where(token: query).map(&:item)
       items.uniq.map(&:body).join("\n")
     end
 
     def find_or_lookup(query)
-      query.downcase!
+      query = normalize_query(query)
       if word = Word.find_by_entry(query)
         word
       else
@@ -38,13 +38,19 @@ class Word < ActiveRecord::Base
     # search the query on the thesaurus.com and paste part of the
     # result.
     def lookup_thesaurus(query)
-      query = query.gsub(/ /, '+')
+      query = normalize_query(query).gsub(/ /, '+')
       begin
         html = Nokogiri::HTML(open("http://thesaurus.com/browse/#{query}").read)
         html.css('.sep_top')[0].to_s.gsub(/<\/a>/, '').gsub(/<a[^>]+>/, '')
       rescue
         "none"
       end
+    end
+
+    private
+
+    def normalize_query(query)
+      query.downcase.gsub(/ +$/, '')
     end
   end
 end
