@@ -10,15 +10,6 @@ class ClipsController < ApplicationController
     end
   end
 
-  def nextup
-    # TODO: clean this up
-    @clips = (0..7).map do |status|
-      Clip.overdue(status)
-    end.flatten!
-    @words = @clips.map(&:word)
-    render 'index'
-  end
-
   def next
     # TODO create status table
     (0..7).each do |status|
