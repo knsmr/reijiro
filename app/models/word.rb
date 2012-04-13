@@ -39,8 +39,12 @@ class Word < ActiveRecord::Base
     # result.
     def lookup_thesaurus(query)
       query = query.gsub(/ /, '+')
-      html = Nokogiri::HTML(open("http://thesaurus.com/browse/#{query}").read)
-      html.css('.sep_top')[0].to_s.gsub(/<\/a>/, '').gsub(/<a[^>]+>/, '')
+      begin
+        html = Nokogiri::HTML(open("http://thesaurus.com/browse/#{query}").read)
+        html.css('.sep_top')[0].to_s.gsub(/<\/a>/, '').gsub(/<a[^>]+>/, '')
+      rescue
+        "none"
+      end
     end
   end
 end
