@@ -11,6 +11,8 @@ module WordsHelper
 
     body.each_line do |line|
       line.gsub!(entry, "<strong class='highlight'>" + entry + "</strong>")
+      line = remove_yomigana(line)
+
       case line
       when /^(■.*)$/
         items << "<p>#{$1}</p>\n"
@@ -19,5 +21,11 @@ module WordsHelper
       end
     end
     underlined + items
+  end
+
+  def remove_yomigana(str)
+    # ■akin {形} : 血族｛けつぞく｝の、同族｛どうぞく｝の、同種｛どうしゅ｝の
+    # → ■akin {形} : 血族の、同族の、同種の
+    str.gsub(/｛[^｝]+｝/, '')
   end
 end
