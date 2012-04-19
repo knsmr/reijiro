@@ -65,7 +65,14 @@ class ClipsController < ApplicationController
       remain = total - (undone + done)
       @stats[l] = {undone: undone, done: done, total: total, remain: remain}
     end
-    @stats['0'] = {undone: Clip.level(0).count, done: Clip.level(0).done.count}
+
+    @stats['0'] = {
+      undone: Clip.level(0).count,
+      done: Clip.level(0).done.count,
+      total: Clip.level(0).count,
+      remain: 0
+    }
+
     @stats['total'] = {
       undone: Clip.undone.count,
       done: Clip.done.count,
