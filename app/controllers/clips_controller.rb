@@ -2,7 +2,7 @@ class ClipsController < ApplicationController
   # 1 /clips
   # GET /clips.json
   def index
-    @words = Word.joins(:clip).where('status != 8').order('updated_at DESC').limit(50)
+    @words = Word.joins(:clip).where('status != 8').order('updated_at DESC').page params[:page]
 
     respond_to do |format|
       format.html # index.html.erb

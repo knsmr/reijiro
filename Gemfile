@@ -9,6 +9,7 @@ gem 'sqlite3'
 gem 'haml-rails'
 gem 'ruby-progressbar'
 gem 'nokogiri'
+gem 'kaminari'
 
 group :development do
   gem 'awesome_print'
