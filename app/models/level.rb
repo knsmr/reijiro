@@ -6,10 +6,12 @@ class Level < ActiveRecord::Base
     end
 
     def yet_to_import(level, max = 10)
-      db = ActiveRecord::Base.connection
-      result = db.execute("SELECT word FROM levels WHERE level == #{level} AND word NOT IN (SELECT entry FROM words) limit #{max};");
-      unless result.empty?
-        result.map{|w| w['word']}
+      words =
+        Level.where(level: level)
+        .where("word NOT IN (?)", Word.pluck(:entry))
+        .limit(max).pluck(:word)
+      unless words.empty?
+        words
       else
         nil
       end
