@@ -7,9 +7,13 @@
       Last checked:
       = "#{time_ago_in_words(@word.clip.updated_at)} ago" if @word.clip
     %li#google-link
-      = link_to "Search this with Google", "https://www.google.com/search?hl=en&q=%22#{@word.entry}%22", target: '_blank'
+      = link_to "Google", "https://www.google.com/search?hl=en&q=%22#{@word.entry}%22", target: '_blank'
     %li#google-link
-      = link_to "Search this with NY Times", "https://www.google.com/search?hl=en&q=#{@word.entry}+site%3Anytimes.com", target: '_blank'
+      = link_to "Pronunciation", "https://www.google.com/search?hl=en&q=#{@word.entry} pronunciation", target: '_blank'
+    %li#google-link
+      = link_to "Wiktionary", "https://www.google.com/search?hl=en&q=#{@word.entry} wiktionary", target: '_blank'
+    %li#google-link
+      = link_to "NYT", "https://www.google.com/search?hl=en&q=#{@word.entry}+site%3Anytimes.com", target: '_blank'
 
   - unless Clip.where(word_id: @word.id).first
     = form_for Clip.new(shown: 1, word_id: @word.id) do |f|
