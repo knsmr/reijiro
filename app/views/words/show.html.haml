@@ -1,27 +1,11 @@
 #word
-  %ul
-    %li#level
-      Level:
-      = @word.level
-    %li#shown
-      Last checked:
-      = "#{time_ago_in_words(@word.clip.updated_at)} ago" if @word.clip
-    %li#google-link
-      = link_to "Google", "https://www.google.com/search?hl=en&q=%22#{@word.entry}%22", target: '_blank'
-    %li#google-link
-      = link_to "Pronunciation", "https://www.google.com/search?hl=en&q=#{@word.entry} pronunciation", target: '_blank'
-    %li#google-link
-      = link_to "Wiktionary", "https://www.google.com/search?hl=en&q=#{@word.entry} wiktionary", target: '_blank'
-    %li#google-link
-      = link_to "NYT", "https://www.google.com/search?hl=en&q=#{@word.entry}+site%3Anytimes.com", target: '_blank'
-
-  - unless Clip.where(word_id: @word.id).first
-    = form_for Clip.new(shown: 1, word_id: @word.id) do |f|
-      = f.hidden_field :word_id
-      = f.hidden_field :status
-      = f.hidden_field :shown
-      = f.hidden_field :nextup
-      = f.submit 'Clip this!'
+  #level
+    Level:
+    = @word.level
+  #shown
+    Last checked:
+    = "#{time_ago_in_words(@word.clip.updated_at)} ago" if @word.clip
+  = render partial: "words/search_links", locals: {entry: @word.entry}
 
   #entry
     = @word.entry

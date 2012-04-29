@@ -4,6 +4,10 @@ module WordsHelper
     link_to duration, clip_path(@word.clip, clip: {status: status}), class: 'btn', id: "status#{status}", method: :put, remote: true, data: {type: :json}
   end
 
+  def link_to_google(str, query)
+    link_to str, "https://www.google.com/search?hl=en&q=#{query}", target: '_blank'
+  end
+
   def preprocess(word)
     entry = word.entry
     body = word.definition
