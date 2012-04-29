@@ -4,6 +4,6 @@
   %li
     = link_to_google "Google", "%22#{entry}%22"
   %li
-    = link_to_google "Wiktionary", "#{entry} wiktionary"
+    = link_to "Wiktionary", "http://en.wiktionary.org/wiki/#{entry.gsub(/ /, '_')}", target: '_blank'
   %li
     = link_to_google "NYT", "#{entry}+site%3Anytimes.com"
