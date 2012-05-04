@@ -24,5 +24,15 @@ class Clip < ActiveRecord::Base
     def overdue_count
       (0..7).inject(0){|acc, s| acc += Clip.overdue(s).count}
     end
+
+    def next_clip
+      # TODO: create status table?
+      clip = nil
+      (0..7).each do |status|
+        clip = Clip.overdue(status).first
+        break unless clip.blank?
+      end
+      clip ? clip : nil
+    end
   end
 end

@@ -10,12 +10,7 @@ class ClipsController < ApplicationController
   end
 
   def next
-    # TODO create status table
-    (0..7).each do |status|
-      @clip = Clip.overdue(status).first
-      break unless @clip.blank?
-    end
-
+    @clip = Clip.next_clip
     if @clip
       @word = @clip.word
       render template: 'words/show'
