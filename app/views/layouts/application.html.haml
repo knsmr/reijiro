@@ -12,7 +12,7 @@
           %a.brand{:href => "/"} Reijiro
           %ul.nav
             %li
-              = link_to "Next (#{Clip.overdue_count})", root_path
+              = link_to "Next (#{Clip.overdue_count})", next_path
             %li
               = link_to "Clips (#{Clip.undone.count}/#{Clip.count})", clips_path
             %li.dropdown
