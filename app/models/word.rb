@@ -14,24 +14,20 @@ class Word < ActiveRecord::Base
       items.uniq.map(&:body).join("\n")
     end
 
-    def find_or_lookup(query)
+    def search(query)
       query = normalize_query(query)
-      if word = Word.find_by_entry(query)
+      definition = lookup(query)
+      level = Level.check(query)
+      thesaurus = lookup_thesaurus(query)
+      unless definition.empty?
+        word = Word.create(entry: query,
+                           level: level,
+                           thesaurus: thesaurus,
+                           definition: definition)
+        word.create_clip(status: 0)
         word
       else
-        definition = lookup(query)
-        level = Level.check(query)
-        thesaurus = lookup_thesaurus(query)
-        unless definition.empty?
-          word = Word.create(entry: query,
-                             level: level,
-                             thesaurus: thesaurus,
-                             definition: definition)
-          word.create_clip(status: 0)
-          word
-        else
-          nil
-        end
+        nil
       end
     end
 

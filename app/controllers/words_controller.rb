@@ -46,7 +46,10 @@ class WordsController < ApplicationController
 
   def search
     query = params[:query]
-    if @word = Word.find_or_lookup(query)
+    if @word = Word.where(entry: query).first
+      flash.now[:success] = "Already clipped!"
+      render 'show'
+    elsif @word = Word.search(query)
       flash.now[:success] = "Found and clipped!"
       render 'show'
     else
@@ -59,7 +62,7 @@ class WordsController < ApplicationController
     @words = []
     if words = Level.yet_to_import(params[:level], 5)
       words.each do |word|
-        @words << Word.find_or_lookup(word)
+        @words << Word.search(word)
       end
       flash.now[:success] = "Imported 5 words below from level#{params[:level]}."
       render 'index'
