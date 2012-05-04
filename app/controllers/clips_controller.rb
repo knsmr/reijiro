@@ -1,6 +1,4 @@
 class ClipsController < ApplicationController
-  # 1 /clips
-  # GET /clips.json
   def index
     @words = Word.joins(:clip).where('status != 8').order('updated_at DESC').page params[:page]
     @list_title = "Clipped words"
@@ -36,8 +34,6 @@ class ClipsController < ApplicationController
     render 'index'
   end
 
-  # PUT /clips/1
-  # PUT /clips/1.json
   def update
     @clip = Clip.find(params[:id])
     @clip.touch # touch the record, even if there's no change
@@ -53,8 +49,6 @@ class ClipsController < ApplicationController
     end
   end
 
-  # DELETE /clips/1
-  # DELETE /clips/1.json
   def destroy
     @clip = Clip.find(params[:id])
     @clip.destroy
@@ -65,8 +59,6 @@ class ClipsController < ApplicationController
     end
   end
 
-  # GET /stats/
-  # GET /stats.json
   def stats
     @stats = {}
     (1..12).each do |l|
