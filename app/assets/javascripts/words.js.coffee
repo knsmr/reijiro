@@ -34,6 +34,6 @@ $ ->
     $(this).hide()
     $('#body').show()
 
-  # show the body if the action is not 'clips#next'
-  if(!(//.test(window.location.pathname)))
+  # show the body if there's no show buttons
+  if $('#show').length == 0
     $('#body').show()
