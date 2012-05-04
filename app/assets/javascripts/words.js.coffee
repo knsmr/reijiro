@@ -5,9 +5,9 @@ $ ->
   # widen textarea for words#edit form
   $('#word_definition').css('width', '90%')
 
-  # redirect action to /next
+  # redirect to /
   jumptoNext = ->
-    nextPath = -> window.location = '/next'
+    nextPath = -> window.location = '/'
     setTimeout nextPath, 200
 
   highlightButton = ->
@@ -35,5 +35,5 @@ $ ->
     $('#body').show()
 
   # show the body if the action is not 'clips#next'
-  if(!(/next/.test(window.location.pathname)))
+  if(!(//.test(window.location.pathname)))
     $('#body').show()
