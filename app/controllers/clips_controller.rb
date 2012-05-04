@@ -3,6 +3,7 @@ class ClipsController < ApplicationController
   # GET /clips.json
   def index
     @words = Word.joins(:clip).where('status != 8').order('updated_at DESC').page params[:page]
+    @list_title = "Clipped words"
 
     respond_to do |format|
       format.html # index.html.erb
@@ -31,6 +32,7 @@ class ClipsController < ApplicationController
       next_ids << Clip.overdue(status).map(&:word_id)
     end
     @words = Word.joins(:clip).where('words.id IN (?)', next_ids.flatten).order('clips.status ASC').order('clips.updated_at DESC').page params[:page]
+    @list_title = "Words to review"
     render 'index'
   end
 
