@@ -20,11 +20,7 @@ class ClipsController < ApplicationController
   end
 
   def nextup
-    next_ids = []
-    (0..7).each do |status|
-      next_ids << Clip.overdue(status).map(&:word_id)
-    end
-    @words = Word.joins(:clip).where('words.id IN (?)', next_ids.flatten).order('clips.status ASC').order('clips.updated_at DESC').page params[:page]
+    @words = Clip.next_list.page params[:page]
     @list_title = "Words to review"
     render 'index'
   end

@@ -34,5 +34,13 @@ class Clip < ActiveRecord::Base
       end
       clip ? clip : nil
     end
+
+    def next_list
+      next_ids = []
+      (0..7).each do |status|
+        next_ids << Clip.overdue(status).map(&:word_id)
+      end
+      Word.joins(:clip).where('words.id IN (?)', next_ids.flatten).order('clips.status ASC').order('clips.updated_at DESC')
+    end
   end
 end
