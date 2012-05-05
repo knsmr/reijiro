@@ -15,13 +15,8 @@
               = link_to "Next (#{Clip.overdue_count})", next_path
             %li
               = link_to "Clips (#{Clip.undone.count}/#{Clip.count})", clips_path
-            %li.dropdown
-              %a.dropdown-toggle{:href => "#", :data => {:toggle => "dropdown"}}
-                Import(ALC)
-                %b.caret
-              %ul.dropdown-menu
-                - (1..12).each do |l|
-                  = link_to "LEVEL #{l}", importalc_path(l)
+            %li
+              = link_to "Import", import_path
             %li
               = link_to "Stats", stats_path
           %ul.nav.pull-right

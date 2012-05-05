@@ -57,6 +57,9 @@ class WordsController < ApplicationController
     end
   end
 
+  def import
+  end
+
   def import_from_alc12000
     # TODO: This is slow. Should I have used raw SQL instead?
     @words = []
@@ -65,9 +68,9 @@ class WordsController < ApplicationController
         @words << Word.search(word)
       end
       flash.now[:success] = "Imported 5 words below from level#{params[:level]}."
-      render 'index'
+      render 'imported'
     else
-      render text: "No more level #{level} words to import.", layout: true
+      render text: "No more level #{params[:level]} words to import.", layout: true
     end
   end
 end
