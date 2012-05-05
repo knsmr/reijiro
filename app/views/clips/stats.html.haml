@@ -1,6 +1,10 @@
 %h2
   Statistics
 
+In progress
+#progress
+  = (0..8).map{|s| Clip.where(status:s).count}.join('/')
+
 #chart
 
 %table.table.table-striped
@@ -32,3 +36,4 @@
       %td= @stats['total'][:done]
       %td= @stats['total'][:remain]
       %td= @stats['total'][:total]
+
