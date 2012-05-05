@@ -1,9 +1,9 @@
 %ul
   %li
-    = link_to_google "Pronunciation", "#{entry} pronunciation"
-  %li
-    = link_to_google "Google", "%22#{entry}%22"
+    = link_to "Pronunciation", "http://www.macmillandictionary.com/pronunciation/american/#{entry}", target: '_blank'
   %li
     = link_to "Wiktionary", "http://en.wiktionary.org/wiki/#{entry.gsub(/ /, '_')}", target: '_blank'
+  %li
+    = link_to_google "Google", "%22#{entry}%22"
   %li
     = link_to_google "NYT", "#{entry}+site%3Anytimes.com"
