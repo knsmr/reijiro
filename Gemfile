@@ -10,6 +10,7 @@ gem 'haml-rails'
 gem 'ruby-progressbar'
 gem 'nokogiri'
 gem 'kaminari'
+gem 'thin'
 
 group :development do
   gem 'awesome_print'

@@ -64,11 +64,12 @@ class WordsController < ApplicationController
     # TODO: This is slow. Should I have used raw SQL instead?
     @words = []
     if words = Level.yet_to_import(params[:level], 5)
-      words.each do |word|
-        @words << Word.search(word)
+      EM.defer do
+        words.each do |word|
+          @words << Word.search(word)
+        end
       end
-      flash.now[:success] = "Imported 5 words below from level#{params[:level]}."
-      render 'imported'
+      redirect_to root_path, notice: "Importing 5 words from level#{params[:level]}. Wait for a second..."
     else
       render text: "No more level #{params[:level]} words to import.", layout: true
     end
