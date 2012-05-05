@@ -61,15 +61,25 @@ class WordsController < ApplicationController
   end
 
   def import_from_alc12000
-    # TODO: This is slow. Should I have used raw SQL instead?
+    # We want to make sure there's at least one clip available right
+    # after this action. Wait for one word to process but don't wait
+    # for the rest.
     @words = []
-    if words = Level.yet_to_import(params[:level], 5)
+    if word = Level.yet_to_import(params[:level], 1).first
+      @words << Word.search(word)
+    else
+      render text: "No more level #{params[:level]} words to import.", layout: true
+    end
+
+    # Let got the browser immediately since this action is a bit too
+    # time-consuming. EventMachine rocks!
+    if words = Level.yet_to_import(params[:level], 4)
       EM.defer do
         words.each do |word|
           @words << Word.search(word)
         end
       end
-      redirect_to root_path, notice: "Importing 5 words from level#{params[:level]}. Wait for a second..."
+      redirect_to root_path, notice: "Importing 4 more words from level#{params[:level]} in the background."
     else
       render text: "No more level #{params[:level]} words to import.", layout: true
     end
