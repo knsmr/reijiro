@@ -45,7 +45,7 @@ class WordsController < ApplicationController
   end
 
   def search
-    query = params[:query]
+    query = params[:query].downcase.chomp
     if @word = Word.where(entry: query).first
       flash.now[:success] = "Already clipped!"
       render 'show'
