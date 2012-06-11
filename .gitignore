@@ -10,6 +10,9 @@
 # Ignore rvm config
 /.rvmrc
 
+# Ignore pow config
+/.powrc
+
 # Ignore capistrano files
 Capfile
 /config/deploy.rb
