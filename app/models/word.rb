@@ -6,6 +6,13 @@ class Word < ActiveRecord::Base
 
   scope :unclipped, where('id not in (select word_id from words inner join clips on words.id = clips.word_id)')
 
+  before_save :set_level
+
+  def set_level
+    l = Level.where(word: entry)
+    self.level = l.empty? ? 0 : l.first.level
+  end
+
   class << self
     def lookup(query)
       query = normalize_query(query)
@@ -17,11 +24,9 @@ class Word < ActiveRecord::Base
     def search(query)
       query = normalize_query(query)
       definition = lookup(query)
-      level = Level.check(query)
       thesaurus = lookup_thesaurus(query)
       unless definition.empty?
         word = Word.create(entry: query,
-                           level: level,
                            thesaurus: thesaurus,
                            definition: definition)
         word.create_clip(status: 0)
