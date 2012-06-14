@@ -71,7 +71,7 @@ class WordsController < ApplicationController
       render text: "No more level #{params[:level]} words to import.", layout: true
     end
 
-    # Let got the browser immediately since this action is a bit too
+    # Let go the browser immediately since this action is a bit too
     # time-consuming. EventMachine rocks!
     if words = Level.yet_to_import(params[:level], 4)
       EM.defer do
