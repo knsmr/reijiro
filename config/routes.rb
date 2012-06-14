@@ -7,5 +7,8 @@ Reijiro::Application.routes.draw do
   match '/import/' => 'words#import', as: 'import'
   match '/stats' => 'clips#stats', as: 'stats'
   match '/next' => 'clips#nextup', as: 'next'
+
+  match '/level(/:level)' => 'levels#index', as: 'level'
+
   root to: 'clips#next'
 end
