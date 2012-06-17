@@ -1,6 +1,17 @@
 %style
   :sass
-    .entry
+    .right
+      margin-top: 0.5em
+      float: right
 
-- @words.each do |w|
-  .entry #{w}
+%h2 Clip new words
+%p ボタンをクリックすると、レベル別に単語を5個ずつクリップできます。それぞれのレベルの全単語を表示して、個別にクリップすることもできます。
+.import-list
+  - (1..12).each do |l|
+    .level-box
+      = link_to "Level #{l}", alc_path(l), class: 'btn btn-large', method: :post
+      .stat= "#{Clip.level(l).count} / #{Level.where(level: l).count}"
+      .word-list
+        - Level.yet_to_import(l, 5).each do |w|
+          .word= w
+        .right= link_to "全単語 »", level_path(l)

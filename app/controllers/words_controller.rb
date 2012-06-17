@@ -57,9 +57,6 @@ class WordsController < ApplicationController
     end
   end
 
-  def import
-  end
-
   def import_from_alc12000
     # We want to make sure there's at least one clip available right
     # after this action. Wait for one word to process but don't wait
