@@ -1,0 +1,10 @@
+%style
+  :sass
+    .buttons
+      margin: 1em 1em 0 0
+
+= render @words
+
+.buttons
+  = link_to "Next word", root_path, class: 'btn'
+  = link_to "Import more", levels_path, class: 'btn'

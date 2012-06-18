@@ -5,9 +5,9 @@
       font-size: 1.2em
       margin: 0 0 0.2em 0
 
-= form_tag("/search", method: 'put') do
+= form_tag("/import", method: 'post') do
   - @words.each do |w|
     .word
       = check_box_tag w
       = w
-= submit_tag "import"
+  = submit_tag "import"

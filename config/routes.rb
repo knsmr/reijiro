@@ -7,6 +7,7 @@ Reijiro::Application.routes.draw do
   match '/alc(/:level)' => 'words#import_from_alc12000', as: 'alc', via: :post
   match '/stats' => 'clips#stats', as: 'stats'
   match '/next' => 'clips#nextup', as: 'next'
+  match '/import' => 'words#import', as: 'import', via: :post
 
   root to: 'clips#next'
 end

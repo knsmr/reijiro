@@ -57,6 +57,16 @@ class WordsController < ApplicationController
     end
   end
 
+  def import
+    @words = []
+    new_words = params.select {|k, v| v == "1"}.keys
+    new_words.each do |w|
+      @words << Word.search(w)
+    end
+    flash[:notice] = "Imported #{@words.count} words."
+    render "words/import"
+  end
+
   def import_from_alc12000
     # We want to make sure there's at least one clip available right
     # after this action. Wait for one word to process but don't wait
