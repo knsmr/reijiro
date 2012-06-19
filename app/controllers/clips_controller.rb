@@ -15,7 +15,7 @@ class ClipsController < ApplicationController
       @word = @clip.word
       render template: 'words/show'
     else
-      redirect_to import_path, notice: "Yey! No more items to review! Clip a little more?"
+      redirect_to levels_path, notice: "Yey! No more items to review! Clip a little more?"
     end
   end
 
