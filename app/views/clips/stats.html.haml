@@ -1,13 +1,45 @@
-%h2
-  Statistics
-
-In progress
-#progress
-  = (0..8).map{|s| Clip.where(status:s).count}.join('/')
+%h2 Statistics
 
 #chart
 
-%table.table.table-striped
+%h2 Status
+#progress
+  %table.table.table-striped.table-bordered
+    %thead
+      %td Status
+      %td Words
+      %tbody
+      %tr
+        %td New
+        %td= Clip.where(status:0).count
+      %tr
+        %td 1 day
+        %td= Clip.where(status:1).count
+      %tr
+        %td 3 days
+        %td= Clip.where(status:2).count
+      %tr
+        %td 1 week
+        %td= Clip.where(status:3).count
+      %tr
+        %td 2 weeks
+        %td= Clip.where(status:4).count
+      %tr
+        %td 1 month
+        %td= Clip.where(status:5).count
+      %tr
+        %td 2 months
+        %td= Clip.where(status:6).count
+      %tr
+        %td 4 months
+        %td= Clip.where(status:7).count
+      %tr
+        %td Done
+        %td= Clip.where(status:8).count
+
+%h2 In progress
+
+%table.table.table-striped.table-bordered
   %thead
     %tr
       %td Level
