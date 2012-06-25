@@ -69,3 +69,10 @@
       %td= @stats['total'][:remain]
       %td= @stats['total'][:total]
 
+%h2 Checked
+
+%table.table.table-striped.table-bordered
+  - @check_months.each do |date, checks|
+    %tr
+      %td= date.to_date
+      %td= checks.count

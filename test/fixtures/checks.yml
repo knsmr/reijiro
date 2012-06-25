@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  word: 
+  oldstat: 1
+  newstat: 1
+
+two:
+  word: 
+  oldstat: 1
+  newstat: 1

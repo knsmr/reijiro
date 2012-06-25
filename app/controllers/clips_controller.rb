@@ -29,6 +29,8 @@ class ClipsController < ApplicationController
     @clip = Clip.find(params[:id])
     @clip.touch # touch the record, even if there's no change
 
+    Check.create({word_id: @clip.word.id, oldstat: @clip.status, newstat: params[:clip]['status']})
+
     respond_to do |format|
       if @clip.update_attributes(params[:clip])
         format.html { redirect_to @clip, notice: 'Clip was successfully updated.' }
@@ -51,6 +53,8 @@ class ClipsController < ApplicationController
   end
 
   def stats
+    @check_months = Check.check_months
+
     @stats = {}
     (1..12).each do |l|
       undone = Clip.level(l).undone.count

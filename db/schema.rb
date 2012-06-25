@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120402124144) do
+ActiveRecord::Schema.define(:version => 20120625125557) do
+
+  create_table "checks", :force => true do |t|
+    t.integer  "word_id"
+    t.integer  "oldstat"
+    t.integer  "newstat"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "checks", ["word_id"], :name => "index_checks_on_word_id"
 
   create_table "clips", :force => true do |t|
     t.integer  "word_id"
