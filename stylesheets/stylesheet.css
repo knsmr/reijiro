@@ -31,7 +31,7 @@ footer, header, hgroup, menu, nav, section {
 body {
   line-height: 1;
 }
-ol, ul {
+ul {
   list-style: none;
 }
 blockquote, q {
@@ -45,6 +45,13 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+/* Custom Style */
+
+.darkbox {
+  border: 1px solid black;
+  background: #ccffff;
 }
 
 /* Style */
