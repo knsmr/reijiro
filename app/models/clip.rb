@@ -42,5 +42,31 @@ class Clip < ActiveRecord::Base
       end
       Word.joins(:clip).where('words.id IN (?)', next_ids.flatten).order('clips.status ASC').order('clips.updated_at DESC')
     end
+
+    def stats
+      stats = {}
+      (1..12).each do |l|
+        undone = Clip.level(l).undone.count
+        done   = Clip.level(l).done.count
+        total  = Level.where(level: l).count
+        remain = total - (undone + done)
+        stats[l] = {undone: undone, done: done, total: total, remain: remain}
+      end
+
+      stats['0'] = {
+        undone: Clip.level(0).count,
+        done: Clip.level(0).done.count,
+        total: Clip.level(0).count,
+        remain: 0
+      }
+
+      stats['total'] = {
+        undone: Clip.undone.count,
+        done: Clip.done.count,
+        ramin: Level.count - Clip.count,
+        total: Level.count }
+
+      stats
+    end
   end
 end
