@@ -14,5 +14,5 @@
       .word-list
         - Level.yet_to_import(l, 5).each do |w|
           .word= w
-        = link_to "clip them", alc_path(l), class: 'btn', method: :post
+        = link_to "clip them", alc_path(l), id: "level#{l}", class: 'btn', method: :post
         .right= link_to "全単語 »", level_path(l)
