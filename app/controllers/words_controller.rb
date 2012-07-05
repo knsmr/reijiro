@@ -1,4 +1,6 @@
 class WordsController < ApplicationController
+  before_filter :load_word, only: [:show, :edit, :update, :destroy]
+
   def index
     @words = Word.limit(50)
     respond_to do |format|
@@ -8,21 +10,13 @@ class WordsController < ApplicationController
   end
 
   def show
-    @word = Word.find(params[:id])
-
     respond_to do |format|
       format.html
       format.json { render json: @word }
     end
   end
 
-  def edit
-    @word = Word.find(params[:id])
-  end
-
   def update
-    @word = Word.find(params[:id])
-
     respond_to do |format|
       if @word.update_attributes(params[:word])
         format.html { redirect_to @word, notice: 'Word was successfully updated.' }
@@ -35,7 +29,6 @@ class WordsController < ApplicationController
   end
 
   def destroy
-    @word = Word.find(params[:id])
     @word.destroy
 
     respond_to do |format|
@@ -91,4 +84,8 @@ class WordsController < ApplicationController
       render text: "No more level #{params[:level]} words to import.", layout: true
     end
   end
+
+private
+
+  def load_word; @word = Word.find(params[:id]); end
 end
