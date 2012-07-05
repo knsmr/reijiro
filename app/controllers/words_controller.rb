@@ -47,7 +47,7 @@ class WordsController < ApplicationController
     @word.destroy
 
     respond_to do |format|
-      format.html { redirect_to words_url }
+      format.html { redirect_to root_url, notice: 'Deleted a word.' }
       format.json { head :no_content }
     end
   end
