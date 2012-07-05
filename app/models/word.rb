@@ -3,6 +3,7 @@ require 'nokogiri'
 
 class Word < ActiveRecord::Base
   has_one :clip, dependent: :destroy
+  validates :entry, :definition, :level, presence: true
 
   scope :unclipped, where('id not in (select word_id from words inner join clips on words.id = clips.word_id)')
 

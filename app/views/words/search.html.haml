@@ -1,0 +1,23 @@
+%h2 Could not find the word: #{@word.entry}
+
+= form_for(@word) do |f|
+  - if @word.errors.any?
+    #error_explanation
+      %h2
+        = pluralize(@word.errors.count, "error")
+        prohibited this word from being saved:
+      %ul
+        - @word.errors.full_messages.each do |msg|
+          %li= msg
+
+  %p
+    Register this query as a clip instead?
+    = link_to "(Check it on Urbandictionary)", "http://www.urbandictionary.com/define.php?term=#{@query}", target: '_blank'
+  .field
+    = f.text_field :entry
+  .field
+    = f.text_area :definition, size: '60x20'
+  .actions
+    = f.submit "Clip this!"
+  .btn= link_to "Back to the top page", root_path
+

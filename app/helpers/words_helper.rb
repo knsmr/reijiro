@@ -28,8 +28,10 @@ module WordsHelper
         end
       when /^(■.*)$/
         items << "<p>#{$1}</p>\n"
-      when /^@(■.*)$/
+      when /^@(.*)$/
         underlined << "<p class='underscore'>#{$1}</p>\n"
+      when /^(.*)$/
+        items << "<p>#{$1}</p>\n"
       end
     end
     definitions + underlined + items

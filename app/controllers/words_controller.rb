@@ -16,6 +16,21 @@ class WordsController < ApplicationController
     end
   end
 
+  def create
+    @word = Word.new(params[:word])
+
+    respond_to do |format|
+      if @word.save
+        @word.create_clip(status: 0)
+        format.html { redirect_to @word, notice: 'Clip was successfully created.' }
+        format.json { render json: @word, status: :created, location: @word }
+      else
+        format.html { render action: "search" }
+        format.json { render json: @word.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def update
     respond_to do |format|
       if @word.update_attributes(params[:word])
@@ -38,16 +53,15 @@ class WordsController < ApplicationController
   end
 
   def search
-    query = params[:query].downcase.chomp
-    if @word = Word.where(entry: query).first
+    @query = params[:query].downcase.chomp
+    if @word = Word.where(entry: @query).first
       flash.now[:success] = "Already clipped!"
       render 'show'
-    elsif @word = Word.search(query)
+    elsif @word = Word.search(@query)
       flash.now[:success] = "Found and clipped!"
       render 'show'
-    else
-      render text: "Couldn't find #{query}.", layout: true
     end
+    @word = Word.new(entry: @query)
   end
 
   def import
