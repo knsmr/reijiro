@@ -16,9 +16,9 @@
     %div.btn.btn-large#show show
 
   #body
-    %div.next.btn.btn-primary.btn-large Check and proceed
+    %div#next.next.btn.btn-primary.btn-large Check and proceed
     = link_to "Edit", edit_word_path(@word), class: 'btn'
-    = link_to "Delete", @word, class: 'btn', confirm: "Delete #{@word.entry}?", method: :delete
+    = link_to "Delete", @word, class: 'btn', data: {confirm: "Delete #{@word.entry}?"}, method: :delete
     %p
 
     - if @word.clip
