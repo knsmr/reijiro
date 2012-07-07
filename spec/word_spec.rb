@@ -6,13 +6,8 @@ describe Word do
   let(:banana) { build(:word, entry: 'banana') }
   let(:no_entry) { build(:word, entry: '') }
 
-  it "can be saved successfully" do
-    apple.save.should be_true
-  end
-
-  it "can't be saved without entry" do
-    no_entry.save.should be_false
-  end
+  specify { apple.save.should be_true }
+  specify { no_entry.save.should be_false }
 
   describe "set the level value" do
     it "sets an integer value as a level" do
