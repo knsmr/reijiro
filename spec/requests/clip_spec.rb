@@ -56,31 +56,4 @@ feature 'Check clips' do
     find('#show').click
     find('#definition').should be_visible
   end
-
-  scenario 'after cliping 5 words, next should increase by 5', js: true do
-    visit root_path
-    click_link 'Levels'
-    click_link 'level1'
-
-    page.should have_content 'Importing'
-    sleep 5   # wait for the background task to complete
-    visit root_path
-    page.should have_content 'Next (105)'
-  end
-
-  scenario 'try to clip more words when the remaining isn not enough', js: true do
-    visit root_path
-
-    click_link 'Levels'
-    click_link 'level1'
-    sleep 5   # wait for the background task to complete
-
-    click_link 'Levels'
-    click_link 'level1'
-    sleep 5   # wait for the background task to complete
-
-    page.should have_content 'No more level'
-    # Since there are only 6 words in this case.
-    page.should have_content 'Next (106)'
-  end
 end
