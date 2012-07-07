@@ -9,6 +9,10 @@ gem 'nokogiri'
 gem 'kaminari'
 gem 'thin'
 
+gem 'jquery-rails'
+gem 'capistrano'
+gem 'rvm-capistrano'
+
 group :development do
   gem 'awesome_print'
 end
@@ -19,8 +23,12 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
-gem 'capistrano'
-gem 'rvm-capistrano'
-
-gem 'debugger', group: [:development, :test]
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'debugger'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'launchy'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
