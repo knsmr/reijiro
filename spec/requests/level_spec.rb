@@ -2,15 +2,7 @@
 require 'spec_helper'
 
 feature 'Clip words in a level' do
-  background do
-    create_list(:clip, 100)
-    Word.stub(:lookup_thesaurus) { "none" }
-    Word.stub(:search) do |query|
-      c = create :clip
-      c.word.update_attribute(:entry, query)
-      c.word
-    end
-  end
+  include_context 'just created 100 clips'
 
   scenario 'after cliping 5 words, next should increase by 5', js: true do
     visit root_path

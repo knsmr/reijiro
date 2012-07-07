@@ -2,15 +2,7 @@
 require 'spec_helper'
 
 feature 'Check clips' do
-  background do
-    create_list(:clip, 100)
-    Word.stub(:lookup_thesaurus) { "none" }
-    Word.stub(:search) do |query|
-      c = create :clip
-      c.word.update_attribute(:entry, query)
-      c.word
-    end
-  end
+  include_context 'just created 100 clips'
 
   scenario 'show top page with 100 due clips' do
     visit root_path
