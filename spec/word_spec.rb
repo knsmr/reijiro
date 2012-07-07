@@ -31,11 +31,11 @@ describe Word do
   end
 
   describe "#lookup" do
-    let(:definition) { Word.lookup('apple') }
+    subject { Word.lookup('apple') }
 
     it "returns definition including some expressions using apple" do
-      definition.should include("アレルギー")
-      definition.should include("主要関心事")
+      should include("アレルギー")
+      should include("主要関心事")
     end
   end
 end

@@ -2,7 +2,7 @@
 FactoryGirl.define do
   factory :word do
     sequence(:entry) {|n| "word#{n}"}
-    level { rand(12) }
+    level 0
     definition "■apple : りんご"
 
     trait :underscore do
