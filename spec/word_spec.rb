@@ -2,7 +2,7 @@
 require 'spec_helper'
 
 describe Word do
-  let(:apple) { build(:word) }
+  let(:apple) { build(:word, entry: 'apple') }
   let(:banana) { build(:word, entry: 'banana') }
   let(:no_entry) { build(:word, entry: '') }
 

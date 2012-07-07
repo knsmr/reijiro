@@ -1,14 +1,27 @@
 # -*- coding: utf-8 -*-
 FactoryGirl.define do
   factory :word do
-    entry "apple"
+    sequence(:entry) {|n| "word#{n}"}
+    level { rand(12) }
     definition "■apple : りんご"
 
-    factory :word_with_hightlight do
+    trait :underscore do
       definition <<-STR
-      ■apple : りんご
-      @■apple : 大都市
-      ■apple : 野球ボール
+■apple  {名-1} : リンゴ
+■apple  {名-2} : 〈俗〉《野球》ボール
+@■apple : 大都市
+■apple core : リンゴの芯
+■Apple  {人名} : アプル
+      STR
+    end
+
+    trait :no_underscore do
+      definition <<-STR
+■apple  {名-1} : リンゴ
+■apple  {名-2} : 〈俗〉《野球》ボール
+■apple : 大都市
+■apple core : リンゴの芯
+■Apple  {人名} : アプル
       STR
     end
   end

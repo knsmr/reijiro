@@ -40,8 +40,6 @@ module WordsHelper
 private
 
   def remove_yomigana(str)
-    # ■akin {形} : 血族｛けつぞく｝の、同族｛どうぞく｝の、同種｛どうしゅ｝の
-    # → ■akin {形} : 血族の、同族の、同種の
     str.gsub(/｛[^｝]+｝/, '')
   end
 
