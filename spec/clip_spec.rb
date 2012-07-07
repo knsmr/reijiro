@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 require 'spec_helper'
 
-describe Clip do
+describe Clip, "10 clips are created now" do
   let!(:clips) { create_list(:clip, 10) }
 
   it "all clips are overdue" do
@@ -12,14 +12,45 @@ describe Clip do
     Clip.next_clip.should be_a_kind_of(Clip)
   end
 
-  context "when the status of a clip changes" do
+  context "when the statuses of clips change" do
     before do
-      clip = clips.last
-      clip.update_attribute(:status, 1)
+      clips[0].update_attribute(:status, 1)
+      clips[1].update_attribute(:status, 2)
+      clips[2].update_attribute(:status, 3)
     end
 
+    it " has got 7 words in next list" do
+      Clip.next_list.should have(7).words
+    end
+
+    subject { Clip.overdue_count }
+
     it "reduces the number of overdue clips" do
-      Clip.overdue_count.should == 9
+      should == 7
+    end
+
+    context "after a day" do
+      before { Timecop.freeze(Time.now + 1.day) }
+
+      it "state 2, 3 clip will remain not overdue" do
+        should == 8
+      end
+    end
+
+    context "after 4 days" do
+      before { Timecop.freeze(Time.now + 4.days) }
+
+      it "only state 3 clip will remain not overdue" do
+        should == 9
+      end
+    end
+
+    context "after 2 weeks" do
+      before { Timecop.freeze(Time.now + 2.weeks) }
+
+      it "all clips will be overdue again" do
+        should == 10
+      end
     end
   end
 

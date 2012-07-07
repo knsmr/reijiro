@@ -31,4 +31,5 @@ group :development, :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
+  gem 'timecop'
 end
