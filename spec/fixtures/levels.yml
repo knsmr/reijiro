@@ -4,5 +4,285 @@
   level: 1
 2:
   id: 2
+  word: vanish
+  level: 1
+3:
+  id: 3
+  word: unknown
+  level: 1
+4:
+  id: 4
+  word: turnout
+  level: 1
+5:
+  id: 5
+  word: treachery
+  level: 1
+6:
+  id: 6
+  word: transmit
+  level: 1
+7:
+  id: 7
   word: banana
   level: 2
+8:
+  id: 8
+  word: totter
+  level: 2
+9:
+  id: 9
+  word: terrorist
+  level: 2
+10:
+  id: 10
+  word: tally
+  level: 2
+11:
+  id: 11
+  word: subtle
+  level: 2
+12:
+  id: 12
+  word: strengthen
+  level: 2
+13:
+  id: 13
+  word: stimulus
+  level: 3
+14:
+  id: 14
+  word: staunch
+  level: 3
+15:
+  id: 15
+  word: statistics
+  level: 3
+16:
+  id: 16
+  word: stability
+  level: 3
+17:
+  id: 17
+  word: spouse
+  level: 3
+18:
+  id: 18
+  word: sporty
+  level: 3
+19:
+  id: 19
+  word: southeast
+  level: 4
+20:
+  id: 20
+  word: socialization
+  level: 4
+21:
+  id: 21
+  word: snow
+  level: 4
+22:
+  id: 22
+  word: shuffle
+  level: 4
+23:
+  id: 23
+  word: sesame
+  level: 4
+24:
+  id: 24
+  word: sergeant
+  level: 4
+25:
+  id: 25
+  word: seashore
+  level: 5
+26:
+  id: 26
+  word: scarcely
+  level: 5
+27:
+  id: 27
+  word: sampling
+  level: 5
+28:
+  id: 28
+  word: salon
+  level: 5
+29:
+  id: 29
+  word: saint
+  level: 5
+30:
+  id: 30
+  word: rude
+  level: 5
+31:
+  id: 31
+  word: redundant
+  level: 6
+32:
+  id: 32
+  word: reconnaissance
+  level: 6
+33:
+  id: 33
+  word: rapprochement
+  level: 6
+34:
+  id: 34
+  word: quid
+  level: 6
+35:
+  id: 35
+  word: precious
+  level: 6
+36:
+  id: 36
+  word: posh
+  level: 6
+37:
+  id: 37
+  word: popular
+  level: 7
+38:
+  id: 38
+  word: planetary
+  level: 7
+39:
+  id: 39
+  word: persuade
+  level: 7
+40:
+  id: 40
+  word: peck
+  level: 7
+41:
+  id: 41
+  word: patronage
+  level: 7
+42:
+  id: 42
+  word: pathetic
+  level: 7
+43:
+  id: 43
+  word: path
+  level: 8
+44:
+  id: 44
+  word: pad
+  level: 8
+45:
+  id: 45
+  word: orbit
+  level: 8
+46:
+  id: 46
+  word: oblige
+  level: 8
+47:
+  id: 47
+  word: narrator
+  level: 8
+48:
+  id: 48
+  word: momentary
+  level: 8
+49:
+  id: 49
+  word: mob
+  level: 9
+50:
+  id: 50
+  word: mild
+  level: 9
+51:
+  id: 51
+  word: mentor
+  level: 9
+52:
+  id: 52
+  word: jealous
+  level: 9
+53:
+  id: 53
+  word: irrigation
+  level: 9
+54:
+  id: 54
+  word: intimidate
+  level: 9
+55:
+  id: 55
+  word: intervention
+  level: 10
+56:
+  id: 56
+  word: inquisitive
+  level: 10
+57:
+  id: 57
+  word: hurt
+  level: 10
+58:
+  id: 58
+  word: haunted
+  level: 10
+59:
+  id: 59
+  word: grate
+  level: 10
+60:
+  id: 60
+  word: fourteenth
+  level: 10
+61:
+  id: 61
+  word: formulation
+  level: 11
+62:
+  id: 62
+  word: fling
+  level: 11
+63:
+  id: 63
+  word: fearless
+  level: 11
+64:
+  id: 64
+  word: fasting
+  level: 11
+65:
+  id: 65
+  word: excite
+  level: 11
+66:
+  id: 66
+  word: everybody
+  level: 11
+67:
+  id: 67
+  word: edition
+  level: 12
+68:
+  id: 68
+  word: drive
+  level: 12
+69:
+  id: 69
+  word: disagree
+  level: 12
+70:
+  id: 70
+  word: despite
+  level: 12
+71:
+  id: 71
+  word: derive
+  level: 12
+72:
+  id: 72
+  word: demonstrator
+  level: 12
