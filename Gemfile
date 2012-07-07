@@ -28,6 +28,7 @@ group :development, :test do
   gem 'debugger'
   gem 'capybara'
   gem 'capybara-webkit'
+  gem 'database_cleaner'
   gem 'launchy'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
