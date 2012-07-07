@@ -30,7 +30,7 @@ describe Clip, "10 clips are created now" do
     end
 
     context "after a day" do
-      before { Timecop.freeze(Time.now + 1.day) }
+      before { Timecop.travel(Time.now + 1.day) }
 
       it "state 2, 3 clip will remain not overdue" do
         should == 8
@@ -38,7 +38,7 @@ describe Clip, "10 clips are created now" do
     end
 
     context "after 4 days" do
-      before { Timecop.freeze(Time.now + 4.days) }
+      before { Timecop.travel(Time.now + 4.days) }
 
       it "only state 3 clip will remain not overdue" do
         should == 9
@@ -46,7 +46,7 @@ describe Clip, "10 clips are created now" do
     end
 
     context "after 2 weeks" do
-      before { Timecop.freeze(Time.now + 2.weeks) }
+      before { Timecop.travel(Time.now + 2.weeks) }
 
       it "all clips will be overdue again" do
         should == 10
