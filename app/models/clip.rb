@@ -4,13 +4,13 @@ class Clip < ActiveRecord::Base
   INTERVAL = {
     0 => 0.second,
     1 => 1.day,
-    2 => 3.days,
-    3 => 1.week,
-    4 => 2.weeks,
-    5 => 1.month,
-    6 => 2.months,
-    7 => 4.months,
-    8 => 8.months
+    2 => 2.days,
+    3 => 4.days,
+    4 => 1.week,
+    5 => 2.weeks,
+    6 => 1.month,
+    7 => 2.months,
+    8 => 4.months
   }
 
   default_scope order('updated_at DESC')
