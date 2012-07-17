@@ -49,6 +49,11 @@ class Word < ActiveRecord::Base
       end
     end
 
+    def imported_list
+      list = Word.pluck(:entry)
+      list.empty? ? '' : list
+    end
+
     private
 
     def normalize_query(query)

@@ -9,7 +9,7 @@ class LevelsController < ApplicationController
   def show
     @words =
       Level.where(level: params[:id])
-      .where("word NOT IN (?)", Word.pluck(:entry))
+      .where("word NOT IN (?)", Word.imported_list)
       .pluck(:word)
   end
 end
