@@ -50,7 +50,7 @@
 
 	    <p>※ 古いバージョンの英辞郎CD-ROMはPDIC形式というフォーマットを使っていますが、ReijiroはPDICには対応していません。</p>
 
-	    <p>※ RubyやRailsに関する知識がないと、インストールや利用は難しいと思います、スミマセン。</p>
+	    <p>※ RubyやRailsに関する知識が全くないと、インストールや利用は難しいと思います、スミマセン。</p>
 
 	    <p>※ 単に英辞郎CD-ROMを引くのが目的であれば、<a href="https://github.com/edvakf/EijiroX">EijiroX</a>というソフトウェアがあります。テキストをSQlite3形式に変換して、Chromeエクステンションで単語のインクリメンタルサーチができるそうです。動画デモを見る限り、かなりヨサゲです。</p>
 
@@ -90,33 +90,20 @@
 
 	    <p>最初にCD-ROMの辞書をSQlite3形式に変換します。</p>
 
-	    <p>まずReijiroのレポジトリをコピーして、<code>config/initializers/reijiro.rb</code> にある config.dictionary_path を編集します。英辞郎CD-ROMから展開したEIJI-128.TXTや、REIJI-128.TXTなどの辞書テキストファイルへのパスを書き入れてください。英辞郎CD-ROMに含まれるテキストファイルは、CD-ROMに含まれるZIPファイルを書籍に印字されているパスワードで解凍することで得られます。EIJI-128.TXの128はバージョンでCD-ROMの購入時期によって異なります。</p>
+	    <p>まずReijiroのレポジトリをコピーします。英辞郎CD-ROMから展開したEIJI-128.TXTや、REIJI-128.TXTなどの辞書テキストファイルへのパスを、rake db:convertの引数として渡して、以下のように実行してください（zshなど、[ をファイル名展開しようとするシェルをお使いなら、たぶんクオートする必要があります）。英辞郎CD-ROMに含まれるテキストファイルは、CD-ROMに含まれるZIPファイルを書籍に印字されているパスワードで解凍することで得られます。EIJI-128.TXの128はバージョンでCD-ROMの購入時期によって異なります。</p>
 
 	    <pre><code>
 $ git clone https://github.com/knsmr/reijiro
 $ cd reijiro
 $ bundle install
-$ vi config/initializers/reijiro.rb
-
-module Reijiro
-  class Application &lt; Rails::Application
-    # Set the path to EIJI-128.txt, etc.
-    config.dictionary_path = "/path/to/Eijiro6T"
-  end
-end
-	    </code></pre>
-
-	    <p>続いて、データベースを作成します。</p>
-
-	    <pre><code>
-$ rake db:migrate
-$ rake db:seed
+$ rake 'db:convert[/path/to/Eijiro6T]'
 :
-: (takes a while to convert)
+: (DBのマイグレーションと辞書変換でしばらく時間がかかる)
+:
 :
 </code></pre>
 
-	    <p>「rake db:seed」で、英辞郎形式のテキストファイルから、必要なSQlite3のデータベースを生成します。この変換には、2.8GHzのCore 2 Duo＋SSDの環境で、10分以上かかります。</p>
+	    <p>英辞郎形式のテキストファイルから、必要なSQlite3のデータベースを生成します。この変換には、2.8GHzのCore 2 Duo＋SSDの環境で、10分以上かかります。</p>
 
 	    <p>※ 英辞郎のテキストファイルからSQlite3へ変換するコードは、<a href="https://github.com/edvakf/EijiroX">EijiroX</a>のmakedatabase.rbの実装を参考にさせていただきました。</p>
 
