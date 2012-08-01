@@ -23,33 +23,28 @@ describe Clip, "10 clips are created now" do
       Clip.next_list.should have(7).words
     end
 
-    subject { Clip.overdue_count }
-
     it "reduces the number of overdue clips" do
-      should == 7
+      Clip.overdue_count.should == 7
     end
 
     context "after a day" do
-      before { Timecop.travel(Time.now + 1.day) }
-
       it "state 2, 3 clip will remain not overdue" do
-        should == 8
+        expect { Timecop.travel(Time.now + 1.day) }.to change {
+          Clip.overdue_count }.to(8)
       end
     end
 
     context "after 3 days" do
-      before { Timecop.travel(Time.now + 3.days) }
-
       it "only state 3 clip will remain not overdue" do
-        should == 9
+        expect { Timecop.travel(Time.now + 3.days) }.to change {
+          Clip.overdue_count }.to(9)
       end
     end
 
     context "after 2 weeks" do
-      before { Timecop.travel(Time.now + 2.weeks) }
-
       it "all clips will be overdue again" do
-        should == 10
+        expect { Timecop.travel(Time.now + 2.weeks) }.to change {
+          Clip.overdue_count }.to(10)
       end
     end
   end

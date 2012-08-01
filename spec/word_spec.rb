@@ -15,13 +15,11 @@ describe Word do
     end
 
     it "sets 1 as a level for the word apple" do
-      apple.save
-      apple.level.should == 1
+      expect { apple.save }.to change { apple.level }.to(1)
     end
 
     it "sets 2 as a level for the word banana" do
-      banana.save
-      banana.level.should == 2
+      expect { banana.save }.to change { banana.level }.to(2)
     end
   end
 
