@@ -34,7 +34,7 @@ module WordsHelper
         items << "<p>#{$1}</p>\n"
       end
     end
-    definitions + underlined + items
+    underlined + definitions + items
   end
 
 private
