@@ -10,14 +10,11 @@ module WordsHelper
 
   def preprocess(word)
     entry = word.entry
-    body = word.definition
-    body = split_example_sentence(body)
+    body = process_body(word.definition, entry)
+
     definitions = ""; items = ""; underlined = ""
 
     body.each_line do |line|
-      line.gsub!(entry, "<strong class='highlight'>" + entry + "</strong>")
-      line = remove_yomigana(line)
-
       case line
       when /^(.+{([^}]+)} : .+)$/
         category, content = $2, $1
@@ -34,10 +31,17 @@ module WordsHelper
         items << "<p>#{$1}</p>\n"
       end
     end
+
     underlined + definitions + items
   end
 
 private
+
+  def process_body(body, entry)
+    body = split_example_sentence(body)
+    body = remove_yomigana(body)
+    body.gsub(entry, "<strong class='highlight'>" + entry + "</strong>")
+  end
 
   def remove_yomigana(str)
     str.gsub(/｛[^｝]+｝/, '')
