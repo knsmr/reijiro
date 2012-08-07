@@ -14,9 +14,9 @@ describe Clip, "10 clips are created now" do
 
   context "when the statuses of clips change" do
     before do
-      clips[0].update_attribute(:status, 1)
-      clips[1].update_attribute(:status, 2)
-      clips[2].update_attribute(:status, 3)
+      clips[0].update_column(:status, 1)
+      clips[1].update_column(:status, 2)
+      clips[2].update_column(:status, 3)
     end
 
     it " has got 7 words in next list" do
@@ -51,7 +51,7 @@ describe Clip, "10 clips are created now" do
 
   context "when all clips are done" do
     before do
-      clips.map {|c| c.update_attribute(:status, 8)}
+      clips.map {|c| c.update_column(:status, 8)}
     end
 
     it "yields no clips" do

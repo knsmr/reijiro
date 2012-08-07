@@ -6,7 +6,7 @@ shared_context 'just created 100 clips' do
     Word.stub(:lookup_thesaurus) { "none" }
     Word.stub(:search) do |query|
       c = create :clip
-      c.word.update_attribute(:entry, query)
+      c.word.update_column(:entry, query)
       c.word
     end
   end
