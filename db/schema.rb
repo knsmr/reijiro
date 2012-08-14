@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120705062140) do
+ActiveRecord::Schema.define(:version => 20120814023042) do
 
   create_table "checks", :force => true do |t|
     t.integer  "word_id"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20120705062140) do
   create_table "levels", :force => true do |t|
     t.string  "word"
     t.integer "level"
+    t.string  "definition"
   end
 
   add_index "levels", ["word"], :name => "index_levels_on_word"
