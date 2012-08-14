@@ -1,14 +1,19 @@
 %style
   :sass
     .word
-      font-size: 1.2em
-      margin: 0 0 0.2em 0
+      font-size: 1em
+      margin: 0 0 2em 0
+    .entry
+      font-size: 1.3em
+      font-weight: bold
 
 = form_tag("/import", method: 'post') do
   - @words.each_slice(@words.size / 3) do |words|
     .span3
       - words.each do |w|
         .word
-          = check_box_tag w
-          = w
+          .entry
+            = check_box_tag w.word
+            = w.word
+          = truncate(w.definition, length: 30)
   = submit_tag "import"
