@@ -16,7 +16,7 @@ module WordsHelper
 
     body.each_line do |line|
       case line
-      when /^(.+{([^}]+)} : .+)$/
+      when /^([^@].*{([^}]+)} : .+)$/
         category, content = $2, $1
         if category =~ proper_nouns
           items << "<p>#{content}</p>\n"

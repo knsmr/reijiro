@@ -15,6 +15,14 @@ FactoryGirl.define do
       STR
     end
 
+    trait :underscore_for_definition do
+      definition <<-STR
+■apple  {名-1} : リンゴ
+@■apple {名-2} : 大都市
+■apple core : リンゴの芯
+      STR
+    end
+
     trait :no_underscore do
       definition <<-STR
 ■apple  {名-1} : リンゴ

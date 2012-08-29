@@ -12,6 +12,7 @@ describe WordsHelper do
   describe "#preprocess" do
     let(:with_underscore) { create(:word, :underscore) }
     let(:without_underscore) { create(:word, :no_underscore) }
+    let(:with_underscore_for_definition) { create(:word, :underscore_for_definition) }
 
     context "word_with_underscore" do
       it "description has 5 lines" do
@@ -24,6 +25,16 @@ describe WordsHelper do
 
       it "insert underscore class" do
         helper.preprocess(with_underscore).should include("underscore")
+      end
+    end
+
+    context "word_with_underscore_for_definition" do
+      it "description has 3 lines" do
+        helper.preprocess(with_underscore_for_definition).split("\n").should have(3).items
+      end
+
+      it "insert underscore class" do
+        helper.preprocess(with_underscore_for_definition).should include("underscore")
       end
     end
 
