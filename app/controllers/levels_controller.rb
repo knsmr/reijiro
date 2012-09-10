@@ -8,7 +8,14 @@ class LevelsController < ApplicationController
 
   def show
     @words =
-      Level.where(level: params[:id])
+      Level.unknown
+      .where(level: params[:level])
       .where("word NOT IN (?)", Word.imported_list)
+  end
+
+  def known
+    l = Level.where(id: params[:id]).first
+    l.update_column(:known, true)
+    render text: params[:id]
   end
 end

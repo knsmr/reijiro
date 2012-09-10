@@ -47,7 +47,7 @@ class Clip < ActiveRecord::Base
       stats = {}
       (1..12).each do |l|
         undone = Clip.level(l).undone.count
-        done   = Clip.level(l).done.count
+        done   = Clip.level(l).done.count + Level.where(level: l).known.count
         total  = Level.where(level: l).count
         remain = total - (undone + done)
         stats[l] = {undone: undone, done: done, total: total, remain: remain}

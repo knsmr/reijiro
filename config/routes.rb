@@ -1,7 +1,10 @@
 Reijiro::Application.routes.draw do
   resources :words, except: [:new]
   resources :clips, only: [:index, :update, :destroy]
-  resources :levels, only: [:index, :show]
+
+  match '/levels/' => 'levels#index', as: 'levels'
+  match '/levels/:level' => 'levels#show', as: 'level'
+  match '/levels/known/:id' => 'levels#known', as: 'known', via: :post
 
   match '/search' => 'words#search', as: 'search'
   match '/alc(/:level)' => 'words#import_from_alc12000', as: 'alc', via: :post

@@ -10,7 +10,7 @@
   - (1..12).each do |l|
     .level-box
       %h3 Level #{l}
-      .stat= "#{Clip.level(l).count} / #{Level.where(level: l).count}"
+      .stat= "#{Clip.level(l).count + Level.where(level: l).where(known: true).count} / #{Level.where(level: l).count}"
       - if @to_import[l]
         .word-list
           - @to_import[l].each do |w|

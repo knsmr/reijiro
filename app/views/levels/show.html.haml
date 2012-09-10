@@ -3,17 +3,24 @@
     .word
       font-size: 1em
       margin: 0 0 2em 0
+    .id
+      display: none
     .entry
       font-size: 1.3em
       font-weight: bold
+    .known
+      color: #bbbbbb
 
 = form_tag("/import", method: 'post') do
   - @words.each_slice(@words.size / 3) do |words|
     .span3
       - words.each do |w|
         .word
+          .id
+            = w.id
           .entry
             = check_box_tag w.word
             = w.word
           = truncate(w.definition, length: 30)
-  = submit_tag "import"
+          .known.btn.btn-small I know this!
+  = submit_tag "Import"
