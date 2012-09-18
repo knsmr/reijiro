@@ -3,24 +3,28 @@
     .word
       font-size: 1em
       margin: 0 0 2em 0
+      padding: 0.5em
+      border: 1px solid black
+      border-radius: 5px
     .id
       display: none
     .entry
+      margin-top: 0.5em
       font-size: 1.3em
       font-weight: bold
     .known
       color: #bbbbbb
+    .clip
+      color: #bbbbbb
 
-= form_tag("/import", method: 'post') do
-  - @words.each_slice(@words.size / 3) do |words|
-    .span3
-      - words.each do |w|
-        .word
-          .id
-            = w.id
-          .entry
-            = check_box_tag w.word
-            = w.word
-          = truncate(w.definition, length: 30)
-          .known.btn.btn-small I know this!
-  = submit_tag "Import"
+- @words.each_slice(@words.size / 3) do |words|
+  .span3
+    - words.each do |w|
+      .word
+        .known.btn.btn-small I know this!
+        .clip.btn.btn-small Clip!
+        .id
+          = w.id
+        .entry
+          = w.word
+        = truncate(w.definition, length: 30)

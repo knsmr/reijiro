@@ -11,6 +11,7 @@ Reijiro::Application.routes.draw do
   match '/stats' => 'clips#stats', as: 'stats'
   match '/next' => 'clips#nextup', as: 'next'
   match '/import' => 'words#import', as: 'import', via: :post
+  match '/async_import/:word' => 'words#async_import', via: :post
 
   root to: 'clips#next'
 end

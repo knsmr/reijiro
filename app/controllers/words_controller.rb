@@ -74,28 +74,13 @@ class WordsController < ApplicationController
     render "words/import"
   end
 
-  def import_from_alc12000
-    # We want to make sure there's at least one clip available right
-    # after this action. Wait for one word to process but don't wait
-    # for the rest.
-    @words = []
-    if word = Level.yet_to_import(params[:level], 1).first
-      @words << Word.search(word)
-    else
-      render text: "No more level #{params[:level]} words to import.", layout: true
-    end
-
-    # Let go the browser immediately since this action is a bit too
-    # time-consuming. EventMachine rocks!
-    if words = Level.yet_to_import(params[:level], 4)
+  def async_import
+    @query = params[:word].downcase.chomp
+    unless Word.where(entry: @query).first
       EM.defer do
-        words.each do |word|
-          @words << Word.search(word)
-        end
+        @word = Word.search(@query)
       end
-      redirect_to root_path, notice: "Importing 4 more words from level#{params[:level]} in the background."
-    else
-      render text: "No more level #{params[:level]} words to import.", layout: true
+      render nothing: true
     end
   end
 
