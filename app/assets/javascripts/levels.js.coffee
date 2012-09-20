@@ -1,16 +1,14 @@
 $ ->
   $('.word').mouseover ->
-    $(this).find('.known').css('color', 'black')
-    $(this).find('.clip').css('color', 'black')
+    $(this).css('background-color', '#cccccc')
   .mouseout ->
-    $(this).find('.known').css('color', '#dddddd')
-    $(this).find('.clip').css('color', '#dddddd')
+    $(this).css('background-color', '#ffffff')
 
   remove_entry = (elm , disappearingColor) ->
     elm.spin(false)
     elm.css('background', disappearingColor)
     remove = -> elm.fadeOut('slow')
-    setTimeout remove, 100
+    setTimeout remove, 150
 
   $('.known').click ->
     word = $(this).parent()
