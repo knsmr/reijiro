@@ -9,6 +9,7 @@ gem 'nokogiri'
 gem 'kaminari'
 gem 'thin'
 
+gem 'spinjs-rails'
 gem 'jquery-rails'
 gem 'capistrano'
 gem 'rvm-capistrano'
