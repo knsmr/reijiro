@@ -35,7 +35,10 @@ module WordsHelper
     underlined + definitions + items
   end
 
-private
+  def short_defition(str)
+    str = remove_yomigana(str)
+    truncate(str.gsub(/^■[^:]+: /, ''), length: 50)
+  end
 
   def process_body(body, entry)
     body = split_example_sentence(body)

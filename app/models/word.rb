@@ -8,6 +8,7 @@ class Word < ActiveRecord::Base
   scope :unclipped, where('id not in (select word_id from words inner join clips on words.id = clips.word_id)')
 
   before_save :set_level
+  paginates_per 200
 
   def set_level
     l = Level.where(word: entry)

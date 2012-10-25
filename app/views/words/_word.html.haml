@@ -2,4 +2,5 @@
   .entry
     = link_to word.entry, word_path(word)
   .definition
-    = truncate(word.definition.gsub(/^■[^:]+: /, ''), length: 50)
+    = short_defition(word.definition)
+
