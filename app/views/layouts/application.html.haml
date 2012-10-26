@@ -19,6 +19,8 @@
               = link_to "Levels", levels_path
             %li
               = link_to "Stats", stats_path
+            %li
+              = link_to "Done today: #{Check.today.count}"
           %ul.nav.pull-right
             %li
               %form.navbar-search{action: '/search/', method: 'get'}
