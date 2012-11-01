@@ -31,6 +31,23 @@ feature 'Check clips' do
     page.should have_content 'Next (99)'
   end
 
+  scenario 'after checking some clips, Done today shows the number', js: true do
+    visit root_path
+    page.should have_content 'Done today: 0'
+
+    find('#show').click
+    find('#next').click
+    sleep 2
+    find('#show').click
+    find('#next').click
+
+    page.should have_content 'Done today: 2'
+
+    Timecop.travel(Time.now + 1.day)
+    visit root_path
+    page.should have_content 'Done today: 0'
+  end
+
   scenario 'after changing the status of a clip, next should be 99', js: true do
     visit root_path
     page.should have_content 'Next (100)'

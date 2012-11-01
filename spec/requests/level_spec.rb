@@ -1,64 +1,50 @@
 # -*- coding: utf-8 -*-
 require 'spec_helper'
 
-feature 'Clip words in a level' do
+feature 'Clip words in a given level' do
   include_context 'just created 100 clips'
 
-  scenario 'after cliping 5 words, next should increase by 5', js: true do
-    visit root_path
-    click_link 'Levels'
-    click_link 'level1'
-
-    page.should have_content 'Importing'
-    sleep 5   # wait for the background task to complete
-    visit root_path
-    page.should have_content 'Next (105)'
-  end
-
-  scenario 'try to clip more words when the remaining isn not enough', js: true do
+  scenario 'level 1 should have 6 words', js: true do
+    # see spec/fixtures/levels.yml
     visit root_path
 
     click_link 'Levels'
-    click_link 'level1'
-    sleep 5   # wait for the background task to complete
+    within('.level-box') do
+      click_link 'このレベルの単語'
+    end
 
-    click_link 'Levels'
-    click_link 'level1'
-    sleep 5   # wait for the background task to complete
-
-    page.should have_content 'No more level'
-    # Since there are only 6 words in this case.
-    page.should have_content 'Next (106)'
+    sleep 1   # wait for the background task to complete
+    page.should have_selector '.word', count: 6
   end
 
   scenario 'clip one word at a time', js: true do
+    # see: spec/fixtures/levels.yml
     visit root_path
     click_link 'Levels'
     within('.level-box') do
-      click_link '全単語'
+      click_link 'このレベルの単語'
     end
-    # see: spec/fixtures/levels.yml
-    check 'vanish'
-    check 'turnout'
-    sleep 1
-    click_button 'import'
 
-    page.should have_content 'Imported 2 words'
-    page.should have_content 'vanish'
-    page.should have_content 'turnout'
-    page.should have_content 'Next (102)'
+    find('.word .entry').should have_content "apple"
+    find('.clip').click
+    sleep 3
+    find('.word .entry').should_not have_content "apple"
+
+    Clip.next_list.should have(101).words # should have increased
   end
 
-  scenario 'import words', js: true do
+  scenario 'mark a word as known', js: true do
     visit root_path
     click_link 'Levels'
-    click_link 'level1'
-    click_link 'Levels'
-    click_link 'level1'
-    sleep 5 # Wait for the background task to complete
-    visit levels_path
-    page.should have_content 'Reijiro'
-    page.should have_css('.level-box')
-    page.should have_content 'No more words.'
+    within('.level-box') do
+      click_link 'このレベルの単語'
+    end
+
+    find('.word .entry').should have_content "apple"
+    find('.known').click
+    sleep 3
+    find('.word .entry').should_not have_content "apple"
+
+    Clip.next_list.should have(100).words # does not change
   end
 end
