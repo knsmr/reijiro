@@ -1,0 +1,6 @@
+%ul
+  %li
+  - if word.clip
+    %li Last checked: #{time_ago_in_words(word.clip.updated_at)} ago
+    %li Clipped: #{time_ago_in_words(word.clip.created_at)} ago
+  %li Checked: #{word.checks.count} times

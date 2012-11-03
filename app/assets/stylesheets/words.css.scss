@@ -37,19 +37,6 @@
 #word {
     padding: 0 0 0 10px;
 
-    #level {
-	font-size: 20px;
-	padding: 5px;
-	float: left;
-	background-color: grey;
-	color: white;
-    }
-
-    #shown {
-	padding: 5px;
-	float: left;
-    }
-
     ul {
 	list-style-type: none;
 	color: #888888;
@@ -67,13 +54,22 @@
     }
 
     #entry {
-	font-size: 32px;
-	text-shadow: 1px 1px 1px #333333;
 	background-color: #dddddd;
-	padding: 10px 0px 20px 5px;
+	font-size: 32px;
+	padding: 15px 0px 40px 5px;
 	margin-bottom: 10px;
 	clear: both;
 	border-radius: 5px;
+	#item {
+	    padding-left: 5px;
+	    text-shadow: 2px 2px 2px #888888;
+	    float: left;
+	}
+	#level {
+	    padding-left: 3em;
+	    font-size: 20px;
+	    float: left;
+	}
     }
 
     #body {

@@ -1,16 +1,11 @@
 #word
-  #level
-    Level:
-    = @word.level
-  #shown
-    Last checked:
-    = "#{time_ago_in_words(@word.clip.updated_at)} ago" if @word.clip
-    Clipped:
-    = "#{time_ago_in_words(@word.clip.created_at)} ago" if @word.clip
-  = render partial: "words/search_links", locals: {entry: @word.entry}
-
   #entry
-    = @word.entry
+    #item
+      #{@word.entry}
+    #level
+      (level: #{@word.level})
+  = render partial: "words/shown", locals: {word: @word}
+  = render partial: "words/search_links", locals: {entry: @word.entry}
 
   - if params[:action] == "next"
     %div.btn.btn-large#show show
