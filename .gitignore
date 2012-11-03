@@ -4,18 +4,13 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
-# Ignore bundler config
+# Ignore config files
 /.bundle
-
-# Ignore rvm config
 /.rvmrc
-
-# Ignore pow config
 /.powrc
-
-# Ignore capistrano files
 Capfile
 /config/deploy.rb
+/zeus.json
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
