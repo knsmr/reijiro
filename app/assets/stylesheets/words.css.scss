@@ -53,6 +53,12 @@
 	}
     }
 
+    #level {
+	font-size: 20px;
+	padding-bottom: 5px;
+	float: left;
+    }
+
     #entry {
 	background-color: #dddddd;
 	font-size: 32px;
@@ -63,11 +69,6 @@
 	#item {
 	    padding-left: 5px;
 	    text-shadow: 2px 2px 2px #888888;
-	    float: left;
-	}
-	#level {
-	    padding-left: 3em;
-	    font-size: 20px;
 	    float: left;
 	}
     }

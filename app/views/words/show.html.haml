@@ -1,9 +1,8 @@
 #word
+  #level Level: #{@word.level}
   #entry
     #item
       #{@word.entry}
-    #level
-      (level: #{@word.level})
   = render partial: "words/shown", locals: {word: @word}
   = render partial: "words/search_links", locals: {entry: @word.entry}
 
