@@ -31,7 +31,6 @@ group :development, :test do
   gem 'capybara-webkit'
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'timecop'
 end
