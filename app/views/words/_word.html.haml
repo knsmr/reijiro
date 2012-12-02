@@ -1,6 +1,8 @@
 .item
   .entry
     = link_to word.entry, word_path(word)
+  .level
+    = word.level
   .definition
     = short_defition(word.definition)
 
