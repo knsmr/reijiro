@@ -2,6 +2,8 @@ Reijiro::Application.routes.draw do
   resources :words, except: [:new]
   resources :clips, only: [:index, :update, :destroy]
 
+  match '/clips/all' => 'clips#all', as: 'all_clips'
+
   match '/levels/' => 'levels#index', as: 'levels'
   match '/levels/:level' => 'levels#show', as: 'level'
   match '/levels/known/:id' => 'levels#known', as: 'known', via: :post

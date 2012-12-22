@@ -9,6 +9,11 @@ class ClipsController < ApplicationController
     end
   end
 
+  def all
+    @words = Word.joins(:clip).order('updated_at DESC')
+    @list_title = "All clips"
+  end
+
   def next
     @clip = Clip.next_clip
     if @clip

@@ -1,0 +1,5 @@
+%h2= @list_title
+%p
+  %b= "#{@words.count} words"
+- @words.each do |w|
+  = link_to "#{w.entry} ", word_path(w), title: "#{short_defition(w.definition)}"
