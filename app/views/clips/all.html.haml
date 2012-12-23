@@ -2,4 +2,4 @@
 %p
   %b= "#{@words.count} words"
 - @words.each do |w|
-  = link_to "#{w.entry} ", word_path(w), title: "#{short_defition(w.definition)}"
+  = link_to "#{w.entry} ", word_path(w), title: "#{short_definition(w.definition)}"

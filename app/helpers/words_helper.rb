@@ -35,7 +35,7 @@ module WordsHelper
     underlined + definitions + items
   end
 
-  def short_defition(str)
+  def short_definition(str)
     str = remove_yomigana(str)
     truncate(str.gsub(/^■[^:]+: /, ''), length: 50)
   end
