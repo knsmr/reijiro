@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.0.0'
 
 gem 'rails', '3.2.9'
 
@@ -26,7 +27,6 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'debugger'
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
