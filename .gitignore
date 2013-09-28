@@ -7,10 +7,12 @@
 # Ignore config files
 /.bundle
 /.rvmrc
+/.rbenv-version
 /.powrc
 Capfile
 /config/deploy.rb
 /zeus.json
+/.sass-cache
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -22,3 +24,7 @@ config/basic_authentication.rb
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ingnore Bundler
+/vendor/bundle
+
