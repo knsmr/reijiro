@@ -8,6 +8,7 @@ gem 'ruby-progressbar'
 gem 'nokogiri'
 gem 'kaminari'
 gem 'thin'
+gem 'progressbar'
 
 gem 'spinjs-rails'
 gem 'jquery-rails'
@@ -26,7 +27,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'debugger'
+  gem 'byebug'
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
