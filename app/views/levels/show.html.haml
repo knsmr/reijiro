@@ -1,19 +1,18 @@
-%style
-  :sass
-    .word
-      font-size: 1em
-      margin: 0 0 2em 0
-      padding: 0.5em
-      border: 1px solid black
-      border-radius: 5px
-    .id
-      display: none
-    .entry
-      margin-top: 0.5em
-      font-size: 1.3em
-      font-weight: bold
-    .known
-    .clip
+:sass
+  .word
+    font-size: 1em
+    margin: 0 0 2em 0
+    padding: 0.5em
+    border: 1px solid black
+    border-radius: 5px
+  .id
+    display: none
+  .entry
+    margin-top: 0.5em
+    font-size: 1.3em
+    font-weight: bold
+  .known
+  .clip
 
 - @words.each_slice(@words.size / 3) do |words|
   .span3
