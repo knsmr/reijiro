@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require spin
 //= require jquery.spin
-//= require bootstrap
+//= require bootstrap-sprockets
 //= require_tree .
 $(function(){
     $(".alert").alert();

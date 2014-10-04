@@ -14,6 +14,7 @@ gem 'spinjs-rails'
 gem 'jquery-rails'
 gem 'capistrano'
 gem 'rvm-capistrano'
+gem 'bootstrap-sass', '~> 3.2.0'
 
 group :development do
   gem 'awesome_print'
