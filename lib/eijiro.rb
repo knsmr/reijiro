@@ -54,7 +54,8 @@ class EijiroDictionary
     db = SQLite3::Database.new(@dbfile)
     (1..12).each do |level|
       @level_table[level].each do |word|
-        db.execute("INSERT INTO levels (word, level) VALUES (#{sqlstr(word)}, #{level});")
+        definition = db.execute("SELECT items.body FROM items WHERE entry = #{sqlstr(word)}").first.first
+        db.execute("INSERT INTO levels (word, level, definition) VALUES (#{sqlstr(word)}, #{level}, #{sqlstr(definition)});")
       end
     end
     db.close
