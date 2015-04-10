@@ -8,11 +8,13 @@ gem 'ruby-progressbar'
 gem 'nokogiri'
 gem 'kaminari'
 gem 'thin'
+gem 'progressbar'
 
 gem 'spinjs-rails'
 gem 'jquery-rails'
 gem 'capistrano'
-gem 'rvm-capistrano'
+gem 'rvm-capistrano', require: false
+gem 'bootstrap-sass', '~> 3.2.0'
 
 group :development do
   gem 'awesome_print'
@@ -26,7 +28,7 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
-  gem 'debugger'
+  gem 'byebug'
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'database_cleaner'
